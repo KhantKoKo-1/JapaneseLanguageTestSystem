@@ -1,0 +1,6 @@
+.minus_btn {
+    position: absolute;
+    right: 5px; /* Adjust the position of the button */
+    top: 58%;
+    transform: translateY(-50%);
+  }
