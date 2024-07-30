@@ -7,12 +7,16 @@ var lang;
 var score = 0;
         
 window.addEventListener('DOMContentLoaded', (event) => {
-    console.log(questions);
     // Example: Log each description and its corresponding question details
+    displayQuestions();
+})
+
+function displayQuestions() {
     document.getElementById("ques-left").textContent="Question : "+(countQues+1)+"/"+questions.length;
     document.querySelector(".question").innerHTML="<h1>"+questions[countQues].question+"</h1>";
     displayChoices(countQues);
-})
+    countQues++;
+}
 
 function displayChoices(index) {
     const container = document.getElementById('choiceContainer');
@@ -23,15 +27,16 @@ function displayChoices(index) {
         
         let buttonsHtml = q.choices.map((choice, choiceIndex) => `
                     <div class="col-6 mb-2">
-                        <button type="button" class="btn btn-primary btn-lg" style="width: 100%;">
+                        <input type="radio" class="btn-check" style="width: 100%;" name="options-outlined" id="success-outlined_${choiceIndex}" autocomplete="off" checked>
+                        <label class="btn btn-outline-success" for="success-outlined_${choiceIndex}" style="width: 100%; margin: 0;">
                             ${choice}
-                        </button>
+                        </label>
                     </div>
                 `).join('');
 
         container.innerHTML = `
            <div class="row">
-         ${buttonsHtml}
+                ${buttonsHtml}
             </div>
         `;
     } else {
@@ -51,11 +56,15 @@ function displayChoices(index) {
 document.querySelector(".submit-answer").addEventListener("click",function(){
 //     alert(window[lang][countQues].choices[window[lang][countQues].answer-1]);
 //     alert(document.querySelector('input[name="options"]:checked').value);
+        if (questions.length == countQues) {
+            alert('ho')
+        } else {
 
-    
-        score-=5;
-        document.getElementById("score").textContent="Score : "+score;
-        document.getElementById("ques-view").innerHTML+="<div class='ques-circle incorrect'>"+(countQues+1)+"</div>";
+            displayQuestions();
+        }
+        // score-=5;
+        // document.getElementById("score").textContent="Score : "+score;
+        // document.getElementById("ques-view").innerHTML+="<div class='ques-circle incorrect'>"+(countQues+1)+"</div>";
 
 });
 

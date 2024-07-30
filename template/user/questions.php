@@ -96,13 +96,7 @@ if ($error) {
                         </div>
 
                         <div class="choice" id="choiceContainer">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="mb-2">
-                                        <button type="button" class="btn btn-primary btn-lg"
-                                            style="width: 100%;">Q1</button>
-                                    </div>
-                                </div>
+                        </div>
                                 <!-- <div class="col-6">
 
                                 <button type="button" class="btn btn-primary btn-lg"
@@ -118,13 +112,13 @@ if ($error) {
                                 <button type="button" class="btn btn-primary btn-lg"
                                     style="width: 100%;">Q2</button>
                                 </div> -->
-                            </div>
-                        </div>
+                            <!--     -->
+                        <!-- </div> -->
 
-                        <!-- <div class="ans-btn">
+                        <div class="ans-btn">
                             <button type="button" class="submit-answer">Submit Answer</button>
                             <a href="#display-final-score" type="button" class="view-results">View Results</a>
-                        </div> -->
+                        </div>
 
                     </div>
 
