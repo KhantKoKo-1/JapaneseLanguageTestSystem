@@ -76,7 +76,8 @@ if (isset($_GET['err'])) {
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Level Table</strong>
+                        <div class="col-11"><strong class="card-title">Level Table</strong></div>
+                        <div class="col-1"><a type="button" href="<?php echo $admin_base_url ?>category/level_form.php" class="btn btn-info">Create</a></div>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">

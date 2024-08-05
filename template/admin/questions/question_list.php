@@ -61,7 +61,7 @@ $questions = get_all_questions($mysqli);
             <div class="page-title">
                 <ol class="breadcrumb text-right">
                     <li><a href="<?php echo $admin_base_url . 'dashboard/' ?>">Dashboard</a></li>
-                    <li class="active">Account table List</li>
+                    <li class="active">Question table List</li>
                 </ol>
             </div>
         </div>
@@ -75,7 +75,8 @@ $questions = get_all_questions($mysqli);
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Data Table</strong>
+                        <div class="col-11"><strong class="card-title">Question Table</strong></div>
+                        <div class="col-1"><a type="button" href="<?php echo $admin_base_url ?>questions/question_form.php" class="btn btn-info">Create</a></div>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
@@ -85,6 +86,7 @@ $questions = get_all_questions($mysqli);
                                     <th>Description</th>
                                     <th>Level</th>
                                     <th>Type</th>
+                                    <th>Score</th>
                                     <th>Quiz</th>
                                     <th>Correct Quiz</th>
                                     <th>Action</th>
@@ -96,6 +98,7 @@ $questions = get_all_questions($mysqli);
                                 $description = $question['description'];
                                 $level_name  = $question['level_name'];
                                 $type_name   = $question['type_name'];
+                                $score       = $question['score'];
                                 $quiz_infos  = get_quizzes_by_question_id($mysqli, $question_id);
                                 $quiz_description = '';
                                 $correct_answer   = '';
@@ -122,6 +125,7 @@ $questions = get_all_questions($mysqli);
                                     <td> <?php echo $description?> </td>
                                     <td> <?php echo $level_name?> </td>
                                     <td> <?php echo $type_name?> </td>
+                                    <td> <?php echo $score?> </td>
                                     <td> <?php echo $quiz_description?> </td>
                                     <td> <?php echo $correct_answer?> </td>
                                     <td>

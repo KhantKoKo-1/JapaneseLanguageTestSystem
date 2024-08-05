@@ -18,6 +18,7 @@ $levels = get_all_levels($mysqli);
 $types  = get_all_types($mysqli);
 
 $description = $level_id = $type_id =  "";
+$score = 0;
 $description_err = $quizs_err = $type_err = $level_err = $correct_answer_err =  "";
 $correct_answer  = [];
 $is_correct      = false;    
@@ -34,6 +35,7 @@ if (isset($_GET['question_id'])) {
     $description   =  $question_data['description'];
     $level_id      =  $question_data['level_id'];
     $type_id       =  $question_data['type_id'];
+    $score         =  $question_data['score'];
     $quiz_infos    = get_quizzes_by_question_id($mysqli, $question_id);
     $quiz_description = '';
     while ($quiz_info = $quiz_infos->fetch_assoc()) {
@@ -51,10 +53,10 @@ if (isset($_GET['question_id'])) {
 $quiz_sub_names = ['A', 'B', 'C', 'D'];
 
 if (isset($_POST['Submit'])) {
-    $description = $mysqli->real_escape_string($_POST["description"]);
-;
+    $description    = $mysqli->real_escape_string($_POST["description"]);
     $level_id       = $mysqli->real_escape_string($_POST["level_id"]);
     $type_id        = $mysqli->real_escape_string($_POST["type_id"]);
+    $score          = $mysqli->real_escape_string($_POST["score"]);
     $quizzes        = isset($_POST["quizzes"]) ? $_POST["quizzes"] : [];
     $correct_answer = isset($_POST["correct_answer"]) ? $_POST["correct_answer"] : '';
 
@@ -96,7 +98,7 @@ if (isset($_POST['Submit'])) {
     if ($error == false) {
         try {
             if ($question_id != "") {
-                $result = update_questions($mysqli, $question_id, $description, $level_id, $type_id, $user_id);
+                $result = update_questions($mysqli, $question_id, $description, $level_id, $type_id, $score, $user_id);
                 if ($result) {
                     foreach ($quizzes as $index => $quiz) {
                         $quiz_delete_res = delete_quiz($mysqli, $question_id);
@@ -135,7 +137,7 @@ if (isset($_POST['Submit'])) {
                     }
                 }
             } else {
-                $result = save_questions($mysqli, $description, $level_id, $type_id, $user_id);
+                $result = save_questions($mysqli, $description, $level_id, $type_id, $score, $user_id);
                 if ($result) {
                     $last_inserted_id = $mysqli->insert_id;
                     foreach ($quizzes as $index => $quiz) {
@@ -211,6 +213,9 @@ if (isset($_POST['Submit'])) {
         <?php } ?>
         <div class="card">
             <form action="" method="post" class="form-horizontal">
+                <div class="">
+                    <a href="<?php echo $admin_base_url ?>questions/question_list.php" class="btn btn-secondary btn-sm">Back To List</a>
+                </div>
                 <div class="card-header d-flex justify-content-center">
                     <strong>Questions &nbsp;</strong> Form
                 </div>
@@ -260,6 +265,17 @@ if (isset($_POST['Submit'])) {
                             <?php } ?>
                         </div>
                     </div>
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="type" class=" form-control-label">Score</label></div>
+                        <div class="col-6 col-md-6">
+                                <input type="text" id="score" name="score" placeholder="Enter Score"
+                                    class="form-control" value="<?php echo $score; ?>">
+                                <!-- <?php if ($score_err !== '') { ?>
+                                <span class="help-block text-danger"><?php echo $score; ?></span>
+                                <?php } ?> -->
+                            </div>
+                    </div>
+  
                     <div class="row form-group">
                         <div class="col col-md-2"><label for="quiz" class=" form-control-label">
                                 Add Quiz</label></div>
@@ -355,6 +371,26 @@ require_once ("../../../layout/admin/footer.php");
 ?>
 
 <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var scoreInput = document.getElementById('score');
+
+            scoreInput.addEventListener('input', function() {
+                // Remove all non-digit characters
+                var score = this.value.replace(/\D/g, '');
+                
+                // Limit the length to 9 digits
+                var numericScore = Number(score);
+                
+                if (numericScore > 101) {
+                        score =  score.substring(0, 2);; // Set to 100 if greater
+                }
+                score = score.replace(/^0+/, '') || '0';
+
+                this.value = score;
+            });
+        });
+
+
 const container = document.getElementById('inputFieldsContainer');
 let addButton = document.getElementById('addQuiz');
 let showQuizsContainer = document.getElementById('showQuizs');

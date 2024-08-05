@@ -86,6 +86,7 @@ function create_table($mysqli)
         `description` TEXT NOT NULL,
         `level_id` INT NOT NULL,
         `type_id` INT NOT NULL,
+        `score` INT DEFAULT 0,
         `created_by` INT NOT NULL,
         `created_at` DateTime NOT NULL,
         `updated_by` INT DEFAULT NULL,

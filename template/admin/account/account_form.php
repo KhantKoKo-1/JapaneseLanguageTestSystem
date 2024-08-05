@@ -196,7 +196,7 @@ if (isset($_POST['register']) && $_POST['register'] == 2) {
 <div class="content mt-3">
     <div class="animated fadeIn">
         <?php if ($invalid) { ?>
-            <div class="alert  alert-danger alert-dismissible fade show w-75 mx-auto" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show w-75 mx-auto" role="alert">
                 <span class="badge badge-pill badge-danger">Error</span>  <?php echo $invalid_err ?>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -205,6 +205,9 @@ if (isset($_POST['register']) && $_POST['register'] == 2) {
         <?php } ?>
         
         <div class="card">
+           <div class="">
+                <a href="<?php echo $admin_base_url ?>account/account_list.php" class="btn btn-secondary btn-sm">Back To List</a>
+            </div>
             <div class="card-header d-flex justify-content-center fw-bold"><?php echo $title; ?></div>
             <div class="card-body card-block">
                 <form action="" method="post" class="">
@@ -266,7 +269,6 @@ if (isset($_POST['register']) && $_POST['register'] == 2) {
                             <div class="input-group-addon"><span style="cursor: pointer;"
                                     onclick="togglePasswordVisibility(2)"><i id="eye-icon2"
                                         class="fa fa-eye fa-sm"></i></span>
-
                             </div>
                         </div>
                         <?php if (!$validate) { ?>

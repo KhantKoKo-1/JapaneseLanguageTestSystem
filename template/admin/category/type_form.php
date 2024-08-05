@@ -112,6 +112,9 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == 1) {
 
         <div class="row justify-content-center">
             <div class="card w-75 mt-5">
+                <div class="">
+                    <a href="<?php echo $admin_base_url ?>category/type_list.php" class="btn btn-secondary btn-sm">Back To List</a>
+                </div>
                 <div class="card-header d-flex justify-content-center">
                     <strong>Type &nbsp;</strong> Form
                 </div>

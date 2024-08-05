@@ -72,11 +72,11 @@ if (isset($_GET['err'])) {
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
-
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Type Table</strong>
+                        <div class="col-11"><strong class="card-title">Type Table</strong></div>
+                        <div class="col-1"><a type="button" href="<?php echo $admin_base_url ?>category/type_form.php" class="btn btn-info">Create</a></div>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
@@ -89,21 +89,20 @@ if (isset($_GET['err'])) {
                             </thead>
                             <tbody>
                             <?php while ($type = $types->fetch_assoc()) {
-                                $type_id        = $type['type_id'];
-                                $edit_url       = $admin_base_url . "category/type_form.php?type_id=" . $type_id;
-                                $delete_url     = $admin_base_url . "category/type_delete.php?type_id=" . $type_id; 
-                                
+                                $type_id    = $type['type_id'];
+                                $edit_url   = $admin_base_url . "category/type_form.php?type_id=" . $type_id;
+                                $delete_url = $admin_base_url . "category/type_delete.php?type_id=" . $type_id; 
                             ?>
                                 
-                                <tr>
-                                    <td><?php echo $i + 1 ?></td>
-                                    <td><?php echo $type['type_name']; ?></td>
-                                    <td>
-                                        <a href="<?php echo $edit_url?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="confirmDelete('<?php echo $delete_url; ?>')">
-                                            <i class="fa fa-trash-o"></i> Delete
-                                        </a>
-                                </tr>
+                            <tr>
+                                <td><?php echo $i + 1 ?></td>
+                                <td><?php echo $type['type_name']; ?></td>
+                                <td>
+                                    <a href="<?php echo $edit_url?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="confirmDelete('<?php echo $delete_url; ?>')">
+                                        <i class="fa fa-trash-o"></i> Delete
+                                    </a>
+                            </tr>
                             <?php $i++; } ?>    
                             </tbody>
                         </table>

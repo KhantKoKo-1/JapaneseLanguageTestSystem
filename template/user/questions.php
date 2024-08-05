@@ -79,7 +79,7 @@ if ($error) {
     <div class="parent-container d-flex justify-content-center" style="height: 90vh;">
         <div class="card mt-4 border border-dark" style="width: 90%;height:90%">
             <div class="card-body">
-                <a href="<?php echo $user_base_url ."type.php" ?>" class="btn btn-danger">Back</a>
+                <a href="<?php echo $user_base_url ."type.php?level_id=" . $level_id ?>" class="btn btn-danger">Back</a>
                 <div class="row g-5 align-items-center">
                     <div class="quiz">
 

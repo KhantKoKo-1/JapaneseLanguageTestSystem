@@ -30,7 +30,7 @@ require_once ("../../../require/authentication.php");
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/css/style.css">
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/css/custom_style.css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'> -->
     <link href="<?php echo $base_url;?>assets/admin/pnotify.all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/css/sweetalert/sweetalert.min.css">
 

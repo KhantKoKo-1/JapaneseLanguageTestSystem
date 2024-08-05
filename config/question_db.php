@@ -6,6 +6,7 @@ function get_all_questions($mysqli) {
             q.description,
             q.level_id,
             q.type_id,
+            q.score,
             lev.level_name,
             typ.type_name 
             FROM questions AS q 
@@ -47,26 +48,28 @@ function get_question_by_level_id_and_type_id($mysqli, $level_id, $type_id) {
     return $result;
 }
 
-function save_questions($mysqli, $description, $level_id, $type_id, $created_by) {
+function save_questions($mysqli, $description, $level_id, $type_id, $score, $created_by) {
     $currentDateTime = date('Y-m-d H:i:s');
     $level_id   = intval($level_id);
     $type_id    = intval($type_id);
+    $score      = intval($score);
     $created_by = intval($created_by);
-    $sql = "INSERT INTO `questions`(`description`, `level_id`, `type_id`, `created_by`, `created_at`) VALUES ('$description', $level_id, $type_id, $created_by, '$currentDateTime')";
+    $sql = "INSERT INTO `questions`(`description`, `level_id`, `type_id`, `score`,`created_by`, `created_at`) VALUES ('$description', $level_id, $type_id, $score, $created_by, '$currentDateTime')";
     if($mysqli->query($sql)){
         return true;
     }
     return false;
 }
 
-function update_questions($mysqli, $question_id, $description, $level_id, $type_id, $updated_by)
+function update_questions($mysqli, $question_id, $description, $level_id, $type_id, $score, $updated_by)
 {
     $question_id = intval($question_id);
     $level_id    = intval($level_id);
     $type_id     = intval($type_id);
+    $score       = intval($score);
     $currentDateTime = date('Y-m-d H:i:s');
 
-    $sql = "UPDATE `questions` SET `description`='$description',`level_id`='$level_id',`type_id`='$type_id', `updated_by`='$updated_by',`updated_at`='$currentDateTime' WHERE `question_id`= $question_id ";
+    $sql = "UPDATE `questions` SET `description`='$description',`level_id`='$level_id',`type_id`='$type_id',`score`='$score', `updated_by`='$updated_by',`updated_at`='$currentDateTime' WHERE `question_id`= $question_id ";
     if ($mysqli->query($sql)) {
         return true;
     }
