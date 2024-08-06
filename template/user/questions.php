@@ -83,6 +83,7 @@ if ($error) {
         <div class="card mt-4 border border-dark" style="width: 90%;height:90%">
             <div class="card-body">
                 <a href="<?php echo $user_base_url ."type.php?level_id=" . $level_id ?>" class="btn btn-danger">Back</a>
+                <span class="d-flex justify-content-end">Start Time : <b id="start_time"></b></span>
                 <div class="row g-5 align-items-center">
                     <div class="quiz">
 
@@ -94,8 +95,8 @@ if ($error) {
 
                         </div>
                         <br>
+                        <input type="hidden" id="question_id" value="">
                         <div class="question">
-                    
                         </div>
 
                         <div class="choice" id="choiceContainer">
@@ -143,6 +144,7 @@ if ($error) {
     <!-- <script src="script.js"></script> -->
 </body>
 <script>
+    let base_url = "<?php echo $base_url; ?>";
     var questions = <?php echo json_encode($questionData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS); ?>;
 </script>
 <script src="<?php echo $base_url . "assets\user\js\question.js"?>"></script>

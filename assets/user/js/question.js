@@ -5,14 +5,43 @@
 var countQues = 0;
 var lang;
 var score = 0;
+
         
 window.addEventListener('DOMContentLoaded', (event) => {
     // Example: Log each description and its corresponding question details
     displayQuestions();
 })
 
+const answer_no = "";
+
+function getCurrentDateTime() {
+    const now = new Date();
+
+    // Get the current hours, minutes, and seconds
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+
+    // Determine AM or PM
+    // const ampm = hours >= 12 ? 'PM' : 'AM';
+
+    // Convert hours from 24-hour to 12-hour format
+    hours = hours % 12;
+    hours = hours || 12; // the hour '0' should be '12'
+
+    // Add leading zero to minutes and seconds if needed
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    // Format the time string
+    const timeString = `${hours}:${minutes}:${seconds}`;
+    return timeString;
+}
+
 function displayQuestions() {
     document.getElementById("ques-left").textContent="Question : "+(countQues+1)+"/"+questions.length;
+    document.getElementById("question_id").value = questions[countQues].question_id;
+    document.getElementById("start_time").innerHTML = getCurrentDateTime();
     document.querySelector(".question").innerHTML="<h1>"+questions[countQues].question+"</h1>";
     displayChoices(countQues);
     countQues++;
@@ -26,7 +55,7 @@ function displayChoices(index) {
         const q = questions[index];
         
         let buttonsHtml = q.choices.map((choice, choiceIndex) => `
-                    <div class="col-6 mb-2 choice">
+                    <div class="col-6 mb-2">
                         <input type="radio" value="${choiceIndex}" class="btn-check" style="width: 100%;" name="options-outlined" id="success-outlined_${choiceIndex}" autocomplete="off" checked>
                         <label class="btn btn-outline-success" for="success-outlined_${choiceIndex}" style="width: 100%; margin: 0;">
                             ${choice}
@@ -54,13 +83,49 @@ function displayChoices(index) {
 
 
 document.querySelector(".submit-answer").addEventListener("click",function(){
-    let data = [];
+    let question_id = document.getElementById("question_id").value;
+    let start_time  = document.getElementById("start_time").textContent;
+    let end_time    = getCurrentDateTime();
+    let is_correct  = false;
     const selectedChoice = document.querySelector('input[name="options-outlined"]:checked');
+    
     if (selectedChoice) {
         if (selectedChoice.value == questions[countQues-1].answer) {
-            document.getElementById("score").textContent="Score : "+questions[countQues-1].score;
+            is_correct = true;
+            document.getElementById("score").textContent = "Score : " + questions[countQues-1].score;
         }
     }
+    
+    let url = base_url + 'api/answer_api.php';
+    console.log(typeof(question_id))
+    console.log(typeof(start_time))
+    console.log(typeof(end_time))
+    console.log(typeof(is_correct))
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Specify content type
+        },
+        body: JSON.stringify({
+            question_id: question_id,
+            start_time: start_time,
+            end_time: end_time,
+            is_correct: is_correct
+        }) // Convert JavaScript object to JSON string
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); // Parse JSON from the response
+    })
+    .then(data => {
+        console.log(data); // Handle the data
+    })
+    .catch(error => {
+        console.error('Error:', error); // Handle any errors
+    });
+      
 
     if (questions.length == countQues) {
         // alert(questions[0].score)
