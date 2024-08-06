@@ -36,11 +36,12 @@ function get_question_by_id($mysqli, $question_id) {
 function get_question_by_level_id_and_type_id($mysqli, $level_id, $type_id) {
     $level_id = intval($level_id);
     $type_id  = intval($type_id);
-    $sql = "SELECT 
-            question_id,
-            description,
-            level_id,
-            type_id
+    $sql = "SELECT
+            `question_id`,
+            `description`,
+            `level_id`,
+            `type_id`,
+            `score`
             FROM `questions` 
             WHERE `level_id` = $level_id AND `type_id` = $type_id AND deleted_by IS NULL";
 

@@ -1,7 +1,7 @@
 <?php 
 require_once("../../require/common.php");
 require_once("../../config/db.php");
-require_once("../../require/authentication.php");
+require_once("../../require/user_authentication.php");
 require_once("../../config/type_db.php");
 require_once("../../config/level_db.php");
 require_once("../../config/question_db.php");
@@ -37,6 +37,7 @@ if ($error) {
     while ($question = $questions->fetch_assoc()) {
         $question_id = $question['question_id'];
         $description = $question['description']; // Assuming this field exists
+        $score       = $question['score']; // Assuming this field exists
     
         // Fetch quizzes (choices) related to the current question
         $quizzes = get_quizzes_by_question_id($mysqli, $question_id);
@@ -54,13 +55,15 @@ if ($error) {
         }
     
         $questionData[] = [
-            'question'=> $description,
-            'choices' => $choices,
-            'answer'  => $correct_answer_index
+            'question_id'=> $question_id,
+            'question'   => $description,
+            'score'      => $score,
+            'choices'    => $choices,
+            'answer'     => $correct_answer_index
         ];
     }
     // Encode the array as JSON
-    $jsonQuestions = json_encode($questionData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    // $jsonQuestions = json_encode($questionData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     
 }
 
@@ -99,8 +102,7 @@ if ($error) {
                         </div>
                                 <!-- <div class="col-6">
 
-                                <button type="button" class="btn btn-primary btn-lg"
-                                    style="width: 100%;">Q2</button>
+                                <button type="button" class="btn btn-primary btn-lg"ူ
                                 </div>
                                 <div class="col-6">
 
@@ -136,12 +138,12 @@ if ($error) {
     </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="<?php echo $base_url;?>assets/common/js/jquery/jquery-3.7.1.js"></script>
+    <script src="<?php echo $base_url;?>assets/admin/js/sweetalert/sweetalert2.all.min.js"></script>
     <!-- <script src="script.js"></script> -->
 </body>
 <script>
     var questions = <?php echo json_encode($questionData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS); ?>;
 </script>
 <script src="<?php echo $base_url . "assets\user\js\question.js"?>"></script>
-
 </html>

@@ -71,13 +71,33 @@
 
 
 <!-- JavaScript Libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo $base_url;?>assets/common/js/jquery/jquery-3.7.1.js"></script>
+<script src="<?php echo $base_url?>/assets/user/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo $base_url?>/assets/user/js/wow/wow.min.js"></script>
 <script src="<?php echo $base_url?>/assets/user/js/easing/easing.min.js"></script>
 <script src="<?php echo $base_url?>/assets/user/js/waypoints/waypoints.min.js"></script>
 <script src="<?php echo $base_url?>/assets/user/js/owlcarousel/owl.carousel.min.js"></script>
+<script src="<?php echo $base_url;?>assets/admin/js/sweetalert/sweetalert2.all.min.js"></script>
 
 
 <!-- Template Javascript -->
 <script src="<?php echo $base_url?>/assets/user/js/main.js"></script>
+
+<script>
+    let base_url = "<?php echo $base_url; ?>";
+   $("#logout").click(function(){
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Logout!"
+        }).then((result) => {
+        if (result.isConfirmed) {
+            location.href = base_url + "require/logout.php?type=user";
+        }
+        });
+    });
+</script>

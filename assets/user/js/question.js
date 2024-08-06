@@ -26,8 +26,8 @@ function displayChoices(index) {
         const q = questions[index];
         
         let buttonsHtml = q.choices.map((choice, choiceIndex) => `
-                    <div class="col-6 mb-2">
-                        <input type="radio" class="btn-check" style="width: 100%;" name="options-outlined" id="success-outlined_${choiceIndex}" autocomplete="off" checked>
+                    <div class="col-6 mb-2 choice">
+                        <input type="radio" value="${choiceIndex}" class="btn-check" style="width: 100%;" name="options-outlined" id="success-outlined_${choiceIndex}" autocomplete="off" checked>
                         <label class="btn btn-outline-success" for="success-outlined_${choiceIndex}" style="width: 100%; margin: 0;">
                             ${choice}
                         </label>
@@ -54,18 +54,19 @@ function displayChoices(index) {
 
 
 document.querySelector(".submit-answer").addEventListener("click",function(){
-//     alert(window[lang][countQues].choices[window[lang][countQues].answer-1]);
-//     alert(document.querySelector('input[name="options"]:checked').value);
-        if (questions.length == countQues) {
-            alert('ho')
-        } else {
-
-            displayQuestions();
+    let data = [];
+    const selectedChoice = document.querySelector('input[name="options-outlined"]:checked');
+    if (selectedChoice) {
+        if (selectedChoice.value == questions[countQues-1].answer) {
+            document.getElementById("score").textContent="Score : "+questions[countQues-1].score;
         }
-        // score-=5;
-        // document.getElementById("score").textContent="Score : "+score;
-        // document.getElementById("ques-view").innerHTML+="<div class='ques-circle incorrect'>"+(countQues+1)+"</div>";
+    }
 
+    if (questions.length == countQues) {
+        // alert(questions[0].score)
+    } else {
+        displayQuestions();
+    }
 });
 
 document.querySelector(".view-results").addEventListener("click",function(){

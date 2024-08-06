@@ -23,5 +23,5 @@ $SHA_KEY  = "Aht2";
 date_default_timezone_set('Asia/Yangon');
 $admin_enable_status = 0;
 $admin_disable_status = 1;
-$user_role = 1;
 $admin_role = 0;
+$user_role = 1;

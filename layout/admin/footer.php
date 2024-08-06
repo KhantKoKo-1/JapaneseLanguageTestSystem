@@ -1,6 +1,6 @@
 <!-- partial:partials/_footer.html -->
-<script src="<?php echo $base_url;?>assets/admin/vendors/jquery/jquery.min.js"></script>
-<script src="<?php echo $base_url;?>assets/admin/vendors/jquery/jquery-3.7.1.js"></script>
+<script src="<?php echo $base_url;?>assets/common/js/jquery/jquery.min.js"></script>
+<script src="<?php echo $base_url;?>assets/common/js/jquery/jquery-3.7.1.js"></script>
 
 <script src="<?php echo $base_url;?>assets/admin/vendors/popper.js/dist/umd/popper.min.js"></script>
 <script src="<?php echo $base_url;?>assets/admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>

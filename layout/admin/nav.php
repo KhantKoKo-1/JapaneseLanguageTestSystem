@@ -91,11 +91,11 @@
                 </a>
 
                 <div class="user-menu dropdown-menu">
-                    <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
+                    <a class="nav-link" href="<?php echo $admin_base_url ?>profile/profile.php"><i class="fa fa-user"></i> My Profile</a>
 
                     <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                    <a class="nav-link" href="<?php echo $base_url ?>require/logout.php"><i class="fa fa-power-off"></i> Logout</a>
+                    <a class="nav-link" href="<?php echo $base_url ?>require/logout.php?type=admin"><i class="fa fa-power-off"></i> Logout</a>
                 </div>
             </div>
 

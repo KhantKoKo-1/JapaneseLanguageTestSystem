@@ -2,7 +2,7 @@
 
 require_once("../../../require/common.php");
 require_once("../../../config/db.php");
-require_once ("../../../require/authentication.php");
+require_once ("../../../require/admin_authentication.php");
 
 ?>
 

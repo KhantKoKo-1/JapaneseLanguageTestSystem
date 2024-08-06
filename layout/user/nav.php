@@ -50,6 +50,8 @@
                         <a href="<?php $user_base_url ."home.php"?>" class="nav-item nav-link">Home</a> 
                         <a href="<?php echo $user_base_url. "home.php#questions" ?>" class="nav-item nav-link">Questions</a>
                         <a href="#footer" class="nav-item nav-link">Contact Us</a>
+                        <a type="button" id="logout" class="nav-item nav-link" onClick>Log Out</a>
+                        <!-- <a type="button" class="btn btn-info btn-sm nav-item nav-link">logOut</a> -->
                     </div>
                     <!-- <a href="#"
                         class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Try Sample Questions</a> -->

@@ -40,7 +40,7 @@ if (isset($_GET['level_id'])) {
                             $type_name = $type['type_name'];
                         ?> 
                             <a href="<?php echo $user_base_url ."questions.php?level_id=" .$level_id ."&type_id=" . $type_id?>" class="mb-2">
-                                <button type="button" class="btn btn-primary btn-lg"
+                                <button type="button" class="btn btn-primary btn-lg mb-2"
                                     style="width: 100%;"><?php echo $type_name ?></button>
                         </a>
                         <?php } ?>
