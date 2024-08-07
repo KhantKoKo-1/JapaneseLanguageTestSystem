@@ -22,9 +22,10 @@ require_once ("../../require/user_authentication.php");
         <link href="<?php echo $base_url?>/assets/user/css/css2.css" rel="stylesheet"> 
 
         <!-- Icon Font Stylesheet -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-        <link rel="stylesheet" href="<?php echo $base_url;?>assets/user/vendors/font-awesome/css/font-awesome.min.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo $base_url;?>assets/common/css/vendors/font-awesome/css/font-awesome.min.css">
+        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/> -->
+        <!-- <link rel="stylesheet" href="<?php echo $base_url;?>assets/user/vendors/font-awesome/css/font-awesome.min.css"> -->
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"> -->
         <!-- <link href="<?php echo $base_url?>/assets/user/css/bootstrap-icons.min.css" rel="stylesheet"> -->
 
         <!-- Libraries Stylesheet -->

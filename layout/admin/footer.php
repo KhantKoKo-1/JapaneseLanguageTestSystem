@@ -8,7 +8,7 @@
 <script src="<?php echo $base_url;?>assets/admin/js/main.js"></script>
 <script src="<?php echo $base_url;?>assets/admin/js/pnotify.all.min.js"></script>
 <script src="<?php echo $base_url;?>assets/common/js/alert.js"></script>
-<script src="<?php echo $base_url;?>assets/admin/js/sweetalert/sweetalert2.all.min.js"></script>
+<script src="<?php echo $base_url;?>assets/common/js/sweetalert/sweetalert2.all.min.js"></script>
 
 <script src="<?php echo $base_url;?>assets/admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo $base_url;?>assets/admin/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>

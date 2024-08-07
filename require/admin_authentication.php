@@ -4,7 +4,8 @@ $authenticated = false;
 $user_id = '';
 
 if (isset($_SESSION['admin']['user_id']) || isset($_SESSION['admin']['email'])) {
-    $user_id = $_SESSION['admin']['user_id'];
+    $user_id   = $_SESSION['admin']['user_id'];
+    // $auth_name = $_SESSION['admin']['username'];
 }
 
 // elseif (isset($_COOKIE['id'])) {

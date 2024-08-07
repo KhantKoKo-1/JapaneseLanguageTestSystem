@@ -167,8 +167,8 @@ if (isset($_POST['register']) && $_POST['register'] == 2) {
         $invalid = true;
     }
     
-    }
-    }
+ }
+}
 
 
 ?>
@@ -196,17 +196,18 @@ if (isset($_POST['register']) && $_POST['register'] == 2) {
 <div class="content mt-3">
     <div class="animated fadeIn">
         <?php if ($invalid) { ?>
-            <div class="alert alert-danger alert-dismissible fade show w-75 mx-auto" role="alert">
-                <span class="badge badge-pill badge-danger">Error</span>  <?php echo $invalid_err ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        <div class="alert alert-danger alert-dismissible fade show w-75 mx-auto" role="alert">
+            <span class="badge badge-pill badge-danger">Error</span> <?php echo $invalid_err ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <?php } ?>
-        
+
         <div class="card">
-           <div class="">
-                <a href="<?php echo $admin_base_url ?>account/account_list.php" class="btn btn-secondary btn-sm">Back To List</a>
+            <div class="">
+                <a href="<?php echo $admin_base_url ?>account/account_list.php" class="btn btn-secondary btn-sm">Back To
+                    List</a>
             </div>
             <div class="card-header d-flex justify-content-center fw-bold"><?php echo $title; ?></div>
             <div class="card-body card-block">
@@ -234,16 +235,16 @@ if (isset($_POST['register']) && $_POST['register'] == 2) {
                     </div>
                     <?php } ?>
                     <?php if ($type != "") { ?>
-                        <div class="form-group mt-2">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                <input type="password" id="old_password" name="old_password" placeholder="Old Password"
-                                    class="form-control" value="">
-                            </div>
-                            <?php if (!$validate) { ?>
-                            <span class="help-block text-danger"><?php echo $old_password_err ?></span>
-                            <?php } ?>
+                    <div class="form-group mt-2">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                            <input type="password" id="old_password" name="old_password" placeholder="Old Password"
+                                class="form-control" value="">
                         </div>
+                        <?php if (!$validate) { ?>
+                        <span class="help-block text-danger"><?php echo $old_password_err ?></span>
+                        <?php } ?>
+                    </div>
                     <?php } ?>
                     <?php if ($id == "" || $type != "") { ?>
                     <div class="form-group mt-2">
@@ -272,7 +273,7 @@ if (isset($_POST['register']) && $_POST['register'] == 2) {
                             </div>
                         </div>
                         <?php if (!$validate) { ?>
-                                <span class="help-block text-danger"><?php echo $comfirm_password_err ?></span>
+                        <span class="help-block text-danger"><?php echo $comfirm_password_err ?></span>
                         <?php } ?>
                     </div>
                     <?php } ?>

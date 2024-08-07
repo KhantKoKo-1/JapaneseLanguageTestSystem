@@ -299,17 +299,17 @@ if (isset($_POST['Submit'])) {
                 <?php } ?>
                   
 
+                <div class="card-footer d-flex justify-content-center">
+                    <button type="submit" name="Submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Create
+                    </button>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                </div>
         </div>
         <!-- Modal markup -->
-    </div>
-    <div class="card-footer d-flex justify-content-center">
-        <button type="submit" name="Submit" class="btn btn-primary btn-sm">
-            <i class="fa fa-dot-circle-o"></i> Create
-        </button>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <button type="reset" class="btn btn-danger btn-sm">
-            <i class="fa fa-ban"></i> Reset
-        </button>
     </div>
     </form>
 </div>

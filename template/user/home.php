@@ -63,15 +63,11 @@ $levels = get_all_levels($mysqli);
                                 <div class="service-content-inner">
                                     <h5 class="mb-4"><?php echo $level_name?></h5>
                                     <p class="mb-4"></p>
-                                    <!-- <a href="#" class="btn btn-primary rounded-pill text-white py-2 px-4 mb-2">Read More</a> -->
                                 </div>
                             </div>
                         </a>
                     </div>
                     <?php } ?>
-                    <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.2s">
-                        <a class="btn btn-primary rounded-pill text-white py-3 px-5" href="#">Services More</a>
-                    </div>
                 </div>
             </div>
         </div>

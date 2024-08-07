@@ -4,41 +4,41 @@
         <div class="row g-5">
             <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="footer-item d-flex flex-column">
-                    <h4 class="text-white mb-4"><i class="fas fa-star-of-life me-3"></i>Japanese Language Test System</h4>
+                    <h5 class="text-white mb-4"><i class="fa fa-star-o me-3"></i>Japanese Language Test System</h5>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus dolorem impedit eos autem
                         dolores laudantium quia, qui similique
                     </p>
                     <div class="d-flex align-items-center">
-                        <i class="fas fa-share fa-2x text-white me-2"></i>
+                        <i class="fa fa-share fa-2x text-white me-2"></i>
                         <a class="btn-square btn btn-primary text-white rounded-circle mx-1" href=""><i
-                                class="fab fa-facebook-f"></i></a>
+                                class="fa fa-facebook-f"></i></a>
                         <a class="btn-square btn btn-primary text-white rounded-circle mx-1" href=""><i
-                                class="fab fa-twitter"></i></a>
+                                class="fa fa-twitter"></i></a>
                         <a class="btn-square btn btn-primary text-white rounded-circle mx-1" href=""><i
-                                class="fab fa-instagram"></i></a>
+                                class="fa fa-instagram"></i></a>
                         <a class="btn-square btn btn-primary text-white rounded-circle mx-1" href=""><i
-                                class="fab fa-linkedin-in"></i></a>
+                                class="fa fa-linkedin"></i></a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="footer-item d-flex flex-column">
-                    <h4 class="mb-4 text-white">Quick Links</h4>
-                    <a href="<?php $user_base_url ."home.php"?>"><i class="fas fa-angle-right me-2"></i> Home</a>
-                    <a href="<?php echo $user_base_url. "home.php#questions" ?>"><i class="fas fa-angle-right me-2"></i> Questions</a>
+                    <h5 class="mb-4 text-white">Quick Links</h5>
+                    <a href="<?php $user_base_url ."home.php"?>"><i class="fa fa-angle-right me-2"></i> Home</a>
+                    <a href="<?php echo $user_base_url. "home.php#questions" ?>"><i class="fa fa-angle-right me-2"></i> Questions</a>
                     <!-- <a href=""><i class="fas fa-angle-right me-2"></i> Contact Us</a> -->
-                    <a href=""><i class="fas fa-angle-right me-2"></i> Privacy Policy</a>
-                    <a href=""><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
+                    <a href=""><i class="fa fa-angle-right me-2"></i> Privacy Policy</a>
+                    <a href=""><i class="fa fa-angle-right me-2"></i> Terms & Conditions</a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="footer-item d-flex flex-column">
-                    <h4 class="mb-4 text-white">Contact Info</h4>
-                    <a href=""><i class="fa fa-map-marker-alt me-2"></i> 123 Street, New York, USA</a>
-                    <a href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
-                    <a href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
-                    <a href=""><i class="fas fa-phone me-2"></i> +012 345 67890</a>
-                    <a href="" class="mb-3"><i class="fas fa-print me-2"></i> +012 345 67890</a>
+                    <h5 class="mb-4 text-white">Contact Info</h5>
+                    <a href=""><i class="fa fa-map-marker me-2"></i> 123 Street, New York, USA</a>
+                    <a href=""><i class="fa fa-envelope me-2"></i> info@example.com</a>
+                    <a href=""><i class="fa fa-envelope me-2"></i> info@example.com</a>
+                    <a href=""><i class="fa fa-phone me-2"></i> +012 345 67890</a>
+                    <a href="" class="mb-3"><i class="fa fa-print me-2"></i> +012 345 67890</a>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
     <div class="container">
         <div class="row g-4 align-items-center">
             <div class="col-md-6 text-center text-md-start mb-md-0">
-                <span class="text-white"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Japanese Language Test System</a>,
+                <span class="text-white"><a href="#"><i class="fa fa-copyright text-light me-2"></i>Japanese Language Test System</a>,
                     All right reserved.</span>
             </div>
             <div class="col-md-6 text-center text-md-end text-white">
@@ -77,7 +77,7 @@
 <script src="<?php echo $base_url?>/assets/user/js/easing/easing.min.js"></script>
 <script src="<?php echo $base_url?>/assets/user/js/waypoints/waypoints.min.js"></script>
 <script src="<?php echo $base_url?>/assets/user/js/owlcarousel/owl.carousel.min.js"></script>
-<script src="<?php echo $base_url;?>assets/admin/js/sweetalert/sweetalert2.all.min.js"></script>
+<script src="<?php echo $base_url;?>assets/common/js/sweetalert/sweetalert2.all.min.js"></script>
 
 
 <!-- Template Javascript -->

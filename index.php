@@ -51,7 +51,7 @@ if (isset($_POST['login'])) {
             setcookie("id", $id, time() + (86400 * 30), "/");
           }
 
-          if ($role == $admin_enable_status) {
+          if ($role == $admin_role) {
             $_SESSION['admin']['user_id'] = $id;
             $_SESSION['admin']['email'] = $user['email'];
             $_SESSION['admin']['username'] = $user['name'];

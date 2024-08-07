@@ -33,7 +33,7 @@ if ($error) {
 
     // Fetch questions based on level and type ID
     $questions = get_question_by_level_id_and_type_id($mysqli, $level_id, $type_id);
-    
+
     while ($question = $questions->fetch_assoc()) {
         $question_id = $question['question_id'];
         $description = $question['description']; // Assuming this field exists
@@ -87,12 +87,12 @@ if ($error) {
                 <div class="left-result">
                     <h5 style="color:white;">Your Result</h5>
                     <div class="progress">
-                        <h1 id="main-score">76 </h1>
+                        <h1 id="main-score"></h1>
                         <!-- <p id="main-of-total"> of 100</p> -->
                     </div>
                     <div class="text">
-                        <h2 id="result-text">Great</h2>
-                        <p id="result-text-para">you scored higher than 65% of the people who have taken these test</p>
+                        <h2 id="result-text"></h2>
+                        <p id="result-text-para"></p>
                     </div>
                 </div>
                 <div class="right-result">
@@ -123,6 +123,7 @@ if ($error) {
                         </div>
                         <div class="col-6">
                             <button class="result-button" id="continue">Continue</button>
+                            <button class="result-button" id="backBtn" style="display:none;">Back</button>
                         </div>
                     </div>
                 </div>
@@ -151,23 +152,6 @@ if ($error) {
 
                         <div class="choice" id="choiceContainer">
                         </div>
-                                <!-- <div class="col-6">
-
-                                <button type="button" class="btn btn-primary btn-lg"ူ
-                                </div>
-                                <div class="col-6">
-
-                                <button type="button" class="btn btn-primary btn-lg"
-                                    style="width: 100%;">Q2</button>
-                                </div>
-                                <div class="col-6">
-
-                                <button type="button" class="btn btn-primary btn-lg"
-                                    style="width: 100%;">Q2</button>
-                                </div> -->
-                            <!--     -->
-                        <!-- </div> -->
-
                         <div class="ans-btn">
                             <button type="button" class="submit-answer">Submit Answer</button>
                             <a href="#display-final-score" type="button" class="view-results">View Results</a>
@@ -175,30 +159,20 @@ if ($error) {
 
                     </div>
                 </div>
-                    <!-- <div class="final-result">
-                        <h1>Your result is</h1>
-                        <div class="solved-ques-no">You Solved 10 questions of HTML</div>
-                        <div class="right-wrong">3 Were Right and 4 were Wrong</div>
-                        <div id="display-final-score">Your Final Score is: 35</div>
-                        <div class="remark">Remark: Satisfactory, Keep trying.</div>
-                        <button id="restart">Restart Quiz</button>
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
     
-
-
     <script src="<?php echo $base_url;?>assets/common/js/jquery/jquery-3.7.1.js"></script>
     <script src="<?php echo $base_url?>/assets/user/js/bootstrap.bundle.min.js"></script>
-    <script src="<?php echo $base_url;?>assets/admin/js/sweetalert/sweetalert2.all.min.js"></script>
-    <!-- <script src="script.js"></script> -->
+    <script src="<?php echo $base_url;?>assets/common/js/sweetalert/sweetalert2.all.min.js"></script>
 </body>
 <script>
-    let base_url = "<?php echo $base_url; ?>";
-    var questions = <?php echo json_encode($questionData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS); ?>;
-    
+    const base_url = "<?php echo $base_url; ?>";
+    const user_base_url = "<?php echo $user_base_url; ?>";
+    const level_id = "<?php echo $level_id?>";
+    var questions  = <?php echo json_encode($questionData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS); ?>;
 </script>
 <script src="<?php echo $base_url . "assets\user\js\question.js"?>"></script>
 </html>

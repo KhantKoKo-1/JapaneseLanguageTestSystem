@@ -1,12 +1,7 @@
-//function myfunc(){
-//    alert(document.getElementById("language").value);
-//}
-
 var countQues = 0;
 var lang;
 var score = 0;
-
-        
+       
 window.addEventListener('DOMContentLoaded', (event) => {
     // Example: Log each description and its corresponding question details
     displayQuestions();
@@ -121,8 +116,10 @@ document.querySelector(".submit-answer").addEventListener("click",function(){
                 text:  "Try another question!",
                 footer: 'JLPT Questions TEST'
               });
+              document.getElementById("ques-view").innerHTML+="<div class='ques-circle correct'>"+(countQues)+"</div>"; 
         }
         else {
+            document.getElementById("ques-view").innerHTML+="<div class='ques-circle incorrect'>"+(countQues)+"</div>";
             Swal.fire({
                 icon: "error",
                 title: "Your Answer is Wrong!!",
@@ -156,7 +153,9 @@ document.querySelector(".submit-answer").addEventListener("click",function(){
     .then(data => {
         if (data.status === 'success') {
             if (questions.length == countQues) {
-                alert(questions[0].score)
+                addFinalResult(countQues);
+                document.querySelector("#continue").style.display="none";
+                document.querySelector("#backBtn").style.display="block";
             } else {
                 displayQuestions();
             }
@@ -173,20 +172,38 @@ document.querySelector(".submit-answer").addEventListener("click",function(){
 });
 
 document.querySelector(".view-results").addEventListener("click",function(){
-    
-    document.querySelector(".final-result").style.display = "flex";
-    document.querySelector(".card").style.display = "none";
-    
-    document.querySelector("#solved-ques-no").innerHTML = (countQues -1) + "/" + questions.length;
+    let solvedQuestionCount = countQues -1;
+    addFinalResult(solvedQuestionCount)
+});
 
+function addFinalResult(solvedQuestionCount) {
     let score = document.getElementById("score").textContent;
     let finalScore = score.split("Score : ")[1]
     let percentage = (finalScore / totalScore) * 100;
     let scorePercentage = parseFloat(percentage.toFixed(2));
+    let correctCount   = 0;
+    let inCorrectCount = 0;
+    const correctElement = document.querySelectorAll('.ques-circle.correct');
+    const inCorrectElement = document.querySelectorAll('.ques-circle.incorrect');
+
+    document.querySelector(".final-result").style.display = "flex";
+    document.querySelector(".card").style.display = "none";
+    
+    document.querySelector("#solved-ques-no").innerHTML = (solvedQuestionCount) + "/" + questions.length;
+    // const inCorrectCount = correctCount;
+    if (correctElement) {
+        correctCount = correctElement.length;
+    }
+
+    if (inCorrectElement) {
+        inCorrectCount = inCorrectElement.length;
+    }
+
     document.getElementById("final-score").innerHTML = finalScore + "/" + totalScore;
     document.getElementById("main-score").innerHTML = scorePercentage + '%';
-    document.getElementById("correct-answer").innerHTML = "/" + questions.length;;
-    document.getElementById("incorrect-answer").innerHTML = "/" + questions.length;;
+    document.getElementById("correct-answer").innerHTML = correctCount + "/" + questions.length;;
+    document.getElementById("incorrect-answer").innerHTML = inCorrectCount + "/" + questions.length;;
+
 
     if (scorePercentage > 90) {
         document.getElementById("result-text").innerHTML = 'Excellence';
@@ -198,11 +215,15 @@ document.querySelector(".view-results").addEventListener("click",function(){
         document.getElementById("result-text").innerHTML = 'Less';
         document.getElementById("result-text-para").innerHTML = 'Try again if you still need to pass of these test';
     }
-
-});
+}
 
 document.getElementById("restart").addEventListener("click",function(){
     location.reload();
+});
+
+document.getElementById("backBtn").addEventListener("click",function(){
+    const url = user_base_url + "type.php?level_id=" + level_id;
+        window.location.href = url; 
 });
 
 document.getElementById("continue").addEventListener("click",function(){
