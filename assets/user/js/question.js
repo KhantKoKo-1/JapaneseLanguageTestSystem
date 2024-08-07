@@ -12,7 +12,35 @@ window.addEventListener('DOMContentLoaded', (event) => {
     displayQuestions();
 })
 
-const answer_no = "";
+const totalScore = calculateTotalScore();
+const answerNo = generateAnswerNo();
+const now = new Date();
+const answerDate = now.getFullYear() + '-' +
+                    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(now.getDate()).padStart(2, '0') + ' ' +
+                    String(now.getHours()).padStart(2, '0') + ':' +
+                    String(now.getMinutes()).padStart(2, '0') + ':' +
+                    String(now.getSeconds()).padStart(2, '0');
+
+
+function calculateTotalScore() {
+    let total = 0
+    questions.forEach(question => {
+        total += parseInt(question.score);
+    });
+    return total;
+}
+
+function generateAnswerNo() {
+    const baseString = "JLPT";
+
+    // Optionally, add additional logic to generate a unique or specific answer number
+    // For example, adding a random number or timestamp to the base string
+    const uniqueSuffix = Math.floor(Math.random() * 1000000); // Random number between 0 and 999
+
+    // Combine the base string with the unique suffix
+    return `${baseString}-${uniqueSuffix}`
+}
 
 function getCurrentDateTime() {
     const now = new Date();
@@ -72,15 +100,6 @@ function displayChoices(index) {
         container.innerHTML = '<p>Question not found.</p>';
     }
 }
-// //alert(questions.length);
-// document.getElementById("score").textContent="Score : "+0;
-// document.querySelector(".view-results").style.display="none";
-// // document.querySelector(".quiz").style.display="none";
-// document.querySelector(".final-result").style.display="none";
-
-
-
-
 
 document.querySelector(".submit-answer").addEventListener("click",function(){
     let question_id = document.getElementById("question_id").value;
@@ -92,21 +111,36 @@ document.querySelector(".submit-answer").addEventListener("click",function(){
     if (selectedChoice) {
         if (selectedChoice.value == questions[countQues-1].answer) {
             is_correct = true;
-            document.getElementById("score").textContent = "Score : " + questions[countQues-1].score;
+            let score  = document.getElementById("score").textContent
+            let remainScore = score.split("Score : ")[1]
+            let finalScore  = parseInt(remainScore) + parseInt(questions[countQues-1].score) 
+            document.getElementById("score").textContent = "Score : " + finalScore;
+            Swal.fire({
+                icon: "success",
+                title: "Your Answer is Correct!!",
+                text:  "Try another question!",
+                footer: 'JLPT Questions TEST'
+              });
         }
-    }
+        else {
+            Swal.fire({
+                icon: "error",
+                title: "Your Answer is Wrong!!",
+                text: "Please try another question!!",
+                footer: 'JLPT Questions TEST'
+              });
+        }
+    } 
     
-    let url = base_url + 'api/answer_api.php';
-    console.log(typeof(question_id))
-    console.log(typeof(start_time))
-    console.log(typeof(end_time))
-    console.log(typeof(is_correct))
+    let url = base_url + 'api/save_answer.php';
     fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json' // Specify content type
         },
         body: JSON.stringify({
+            answer_date : answerDate,
+            answer_no : answerNo,
             question_id: question_id,
             start_time: start_time,
             end_time: end_time,
@@ -120,69 +154,58 @@ document.querySelector(".submit-answer").addEventListener("click",function(){
         return response.json(); // Parse JSON from the response
     })
     .then(data => {
-        console.log(data); // Handle the data
+        if (data.status === 'success') {
+            if (questions.length == countQues) {
+                alert(questions[0].score)
+            } else {
+                displayQuestions();
+            }
+        } else {
+            console.error('Error:', data.message);
+        } // Handle the data
     })
     .catch(error => {
         console.error('Error:', error); // Handle any errors
     });
       
 
-    if (questions.length == countQues) {
-        // alert(questions[0].score)
-    } else {
-        displayQuestions();
-    }
+   
 });
 
 document.querySelector(".view-results").addEventListener("click",function(){
     
-    document.querySelector(".final-result").style.display="block";
+    document.querySelector(".final-result").style.display = "flex";
+    document.querySelector(".card").style.display = "none";
     
-    document.querySelector(".solved-ques-no").innerHTML="You Solved "+(countQues+1)+" questions of "+document.getElementById("language").value;
-    
-    var correct= document.getElementById("ques-view").getElementsByClassName("correct").length;
-    
-    document.querySelector(".right-wrong").innerHTML=correct+" were Right and "+((countQues+1)-correct)+" were Wrong";
-    
-    document.getElementById("display-final-score").innerHTML="Your Final Score is: "+score;
-    
-    if (correct/(countQues+1)>0.8){
-        document.querySelector(".remark").innerHTML="Remark: OutStanding ! :)";
-    }else if(correct/(countQues+1)>0.6){
-        document.querySelector(".remark").innerHTML="Remark: Good, Keep Improving.";
-    
-    }else if(correct/(countQues+1)){
-        document.querySelector(".remark").innerHTML="Remark: Satisfactory, Learn More.";
-    }else{
-        document.querySelector(".remark").innerHTML="Remark: Unsatisfactory, Try Again.";
+    document.querySelector("#solved-ques-no").innerHTML = (countQues -1) + "/" + questions.length;
+
+    let score = document.getElementById("score").textContent;
+    let finalScore = score.split("Score : ")[1]
+    let percentage = (finalScore / totalScore) * 100;
+    let scorePercentage = parseFloat(percentage.toFixed(2));
+    document.getElementById("final-score").innerHTML = finalScore + "/" + totalScore;
+    document.getElementById("main-score").innerHTML = scorePercentage + '%';
+    document.getElementById("correct-answer").innerHTML = "/" + questions.length;;
+    document.getElementById("incorrect-answer").innerHTML = "/" + questions.length;;
+
+    if (scorePercentage > 90) {
+        document.getElementById("result-text").innerHTML = 'Excellence';
+        document.getElementById("result-text-para").innerHTML = 'you scored higher than 90% of the people who have taken these test';
+    } else if (scorePercentage > 60) {
+        document.getElementById("result-text").innerHTML = 'Great';
+        document.getElementById("result-text-para").innerHTML = 'you scored higher than 65% of the people who have taken these test';
+    } else {
+        document.getElementById("result-text").innerHTML = 'Less';
+        document.getElementById("result-text-para").innerHTML = 'Try again if you still need to pass of these test';
     }
-    
-//    window.location.href="#display-final-score";
 
 });
 
 document.getElementById("restart").addEventListener("click",function(){
     location.reload();
-
 });
 
-// document.getElementById("about").addEventListener("click",function(){
-//     alert("Quiz Website Project Created By Digvijay Singh");
-
-// });
-
-
-/*Smooth Scroll*/
-
-
-$(document).on('click', 'a[href^="#"]', function (event) {
-    event.preventDefault();
-
-    $('html, body').animate({
-        scrollTop: $($.attr(this, 'href')).offset().top
-    }, 1000);
+document.getElementById("continue").addEventListener("click",function(){
+    document.querySelector(".final-result").style.display="none";
+    document.querySelector(".card").style.display="block";
 });
-
-
-
-/*Smooth Scroll End*/

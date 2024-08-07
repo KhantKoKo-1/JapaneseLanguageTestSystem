@@ -4,6 +4,7 @@
 
 <script src="<?php echo $base_url;?>assets/admin/vendors/popper.js/dist/umd/popper.min.js"></script>
 <script src="<?php echo $base_url;?>assets/admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?php echo $base_url;?>assets/admin/vendors/bootstrap/dist/js/bootstrap5.3.bundle.min.js"></script>
 <script src="<?php echo $base_url;?>assets/admin/js/main.js"></script>
 <script src="<?php echo $base_url;?>assets/admin/js/pnotify.all.min.js"></script>
 <script src="<?php echo $base_url;?>assets/common/js/alert.js"></script>

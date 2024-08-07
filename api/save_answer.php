@@ -7,10 +7,14 @@ header('Content-Type: application/json');
 
 // Get the raw POST data
 $data = json_decode(file_get_contents('php://input'), true);
-var_dump($data);
-exit();
 
-$answer_result = save_answer($mysqli, )
+$answer_result = save_answer($mysqli, $data, $user_id);
 
+if ($answer_result) {
+ echo json_encode([
+    'status' => 'success',
+    'data' => $data
+    ]);
+}
 
 ?>
