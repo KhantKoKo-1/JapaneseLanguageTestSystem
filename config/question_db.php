@@ -25,7 +25,8 @@ function get_question_by_id($mysqli, $question_id) {
             q.question_id,
             q.description,
             q.level_id,
-            q.type_id
+            q.type_id,
+            q.score
             FROM `questions` AS q 
             WHERE q.question_id = $question_id AND q.deleted_by IS NULL";
 

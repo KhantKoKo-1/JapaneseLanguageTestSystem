@@ -31,6 +31,11 @@ if (isset($_GET['user_id'])) {
     }
     $id   = $_GET['user_id'];
     $user_data = get_user_by_id($mysqli, $id);
+    if ($user_data == NULL) {
+        $url =  $base_url . "template/error_pages/404.php";
+        echo '<meta http-equiv="refresh" content="0;url=' . $url . '">';
+        exit();
+    }
     $user_name = $user_data['name'];
     $email     = $user_data['email'];
     $role      = $user_data['role'];
@@ -206,8 +211,9 @@ if (isset($_POST['register']) && $_POST['register'] == 2) {
 
         <div class="card">
             <div class="">
-                <a href="<?php echo $admin_base_url ?>account/account_list.php" class="btn btn-secondary btn-sm">Back To
-                    List</a>
+                <a href="<?php echo $admin_base_url ?>account/account_list.php" class="btn btn-info btn-sm ml-1 mt-1">
+                    <i class="fa fa-arrow-left"></i> Back
+                </a>
             </div>
             <div class="card-header d-flex justify-content-center fw-bold"><?php echo $title; ?></div>
             <div class="card-body card-block">
@@ -281,13 +287,13 @@ if (isset($_POST['register']) && $_POST['register'] == 2) {
                     <div class="form-group mt-2">
                         <div class="input-group">
                             <div class="form-check-inline form-check">
-                                <label for="admin" class="form-check-label ">
+                                <label for="admin" class="form-check-label" style="cursor:pointer;">
                                     <input type="radio" id="admin" name="role" value="<?php echo $admin_role ?>"
                                         class="form-check-input"
                                         <?php echo ($role == $admin_role) ? 'checked' : ''; ?>>Admin
                                 </label>
-                                &nbsp;&nbsp;
-                                <label for="user" class="form-check-label ">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label for="user" class="form-check-label" style="cursor:pointer;">
                                     <input type="radio" id="user" name="role" value="<?php echo $user_role?>"
                                         class="form-check-input"
                                         <?php echo ($role == $user_role) ? 'checked' : ''; ?>>User

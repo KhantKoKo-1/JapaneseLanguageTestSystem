@@ -1,6 +1,6 @@
 var countQues = 0;
-var lang;
-var score = 0;
+// var lang;
+// var score = 0;
        
 window.addEventListener('DOMContentLoaded', (event) => {
     // Example: Log each description and its corresponding question details
@@ -101,14 +101,16 @@ document.querySelector(".submit-answer").addEventListener("click",function(){
     let start_time  = document.getElementById("start_time").textContent;
     let end_time    = getCurrentDateTime();
     let is_correct  = false;
+    let scoreResult       = 0;
     const selectedChoice = document.querySelector('input[name="options-outlined"]:checked');
     
     if (selectedChoice) {
         if (selectedChoice.value == questions[countQues-1].answer) {
             is_correct = true;
-            let score  = document.getElementById("score").textContent
-            let remainScore = score.split("Score : ")[1]
-            let finalScore  = parseInt(remainScore) + parseInt(questions[countQues-1].score) 
+            let score  = document.getElementById("score").textContent;
+            let remainScore = score.split("Score : ")[1];
+            let finalScore  = parseInt(remainScore) + parseInt(questions[countQues-1].score);
+            scoreResult = parseInt(questions[countQues-1].score);
             document.getElementById("score").textContent = "Score : " + finalScore;
             Swal.fire({
                 icon: "success",
@@ -141,7 +143,8 @@ document.querySelector(".submit-answer").addEventListener("click",function(){
             question_id: question_id,
             start_time: start_time,
             end_time: end_time,
-            is_correct: is_correct
+            is_correct: is_correct,
+            score: scoreResult
         }) // Convert JavaScript object to JSON string
     })
     .then(response => {

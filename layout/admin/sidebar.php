@@ -5,7 +5,7 @@
                 aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="./"><img src="<?php echo $base_url; ?>assets/admin/images/logo.png" alt="Logo"></a>
+            <a class="navbar-brand" href="./"><img src="<?php echo $base_url; ?>assets/admin/images/logo-no-background.png" alt="Logo"></a>
             <a class="navbar-brand hidden" href="./"><img src="<?php echo $base_url; ?>assets/admin/images/logo2.png" alt="Logo"></a>
         </div>
 
@@ -20,14 +20,14 @@
                 <?php $category_active = strpos($_SERVER['REQUEST_URI'], 'level_list') !== false || strpos($_SERVER['REQUEST_URI'], 'type_list') !== false; ?>
                 <li class="menu-item-has-children dropdown <?php echo $category_active ? 'active show' : ''; ?>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-                        <i class="menu-icon fa fa-laptop"></i>Category
+                        <i class="menu-icon fa fa-list-alt"></i>Category
                     </a>
                     <ul class="sub-menu children dropdown-menu <?php echo $category_active ? 'show' : ''; ?>">
                         <li class="<?php echo strpos($_SERVER['REQUEST_URI'], 'level_list') !== false ? 'active' : ''; ?>">
-                            <i class="fa fa-puzzle-piece"></i><a href="<?php echo $admin_base_url ?>category/level_list.php">Level List</a>
+                            <i class="fa fa fa-table"></i><a href="<?php echo $admin_base_url ?>category/level_list.php">Level List</a>
                         </li>
                         <li class="<?php echo strpos($_SERVER['REQUEST_URI'], 'type_list') !== false ? 'active' : ''; ?>">
-                            <i class="fa fa-id-badge"></i><a href="<?php echo $admin_base_url ?>category/type_list.php">Type List</a></li>
+                            <i class="fa fa fa-table"></i><a href="<?php echo $admin_base_url ?>category/type_list.php">Type List</a></li>
                     </ul>
                 </li>
 
@@ -35,14 +35,14 @@
                 <?php $questions_active = strpos($_SERVER['REQUEST_URI'], 'question_form') !== false || strpos($_SERVER['REQUEST_URI'], 'question_list') !== false; ?>
                 <li class="menu-item-has-children dropdown <?php echo $questions_active ? 'active show' : ''; ?>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-                        <i class="menu-icon fa fa-laptop"></i>Questions
+                        <i class="menu-icon fa fa-question-circle"></i>Questions
                     </a>
                     <ul class="sub-menu children dropdown-menu <?php echo $questions_active ? 'show' : ''; ?>">
                         <li class="<?php echo strpos($_SERVER['REQUEST_URI'], 'question_form') !== false ? 'active' : ''; ?>">
-                            <i class="fa fa-puzzle-piece"></i><a href="<?php echo $admin_base_url ?>questions/question_form.php">Question Form</a>
+                            <i class="fa fa fa-question"></i><a href="<?php echo $admin_base_url ?>questions/question_form.php">Question Form</a>
                         </li>
                         <li class="<?php echo strpos($_SERVER['REQUEST_URI'], 'question_list') !== false ? 'active' : ''; ?>">
-                            <i class="fa fa-id-badge"></i><a href="<?php echo $admin_base_url ?>questions/question_list.php">Question List</a></li>
+                            <i class="fa fa fa-table"></i><a href="<?php echo $admin_base_url ?>questions/question_list.php">Question List</a></li>
                     </ul>
                 </li>
 
@@ -50,15 +50,20 @@
                 <?php $account_active = strpos($_SERVER['REQUEST_URI'], 'account_form') !== false || strpos($_SERVER['REQUEST_URI'], 'account_list') !== false; ?>
                 <li class="menu-item-has-children dropdown <?php echo $account_active ? 'active show' : ''; ?>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-                        <i class="menu-icon fa fa-laptop"></i>Account
+                        <i class="menu-icon fa fa-users"></i>Account
                     </a>
                     <ul class="sub-menu children dropdown-menu <?php echo $account_active ? 'show' : ''; ?>">
                         <li class="<?php echo strpos($_SERVER['REQUEST_URI'], 'account_form') !== false ? 'active' : ''; ?>">
-                            <i class="fa fa-puzzle-piece"></i><a href="<?php echo $admin_base_url ?>account/account_form.php">Account Form</a>
+                            <i class="fa fa-user-plus"></i><a href="<?php echo $admin_base_url ?>account/account_form.php">Account Form</a>
                         </li>
                         <li class="<?php echo strpos($_SERVER['REQUEST_URI'], 'account_list') !== false ? 'active' : ''; ?>">
-                            <i class="fa fa-id-badge"></i><a href="<?php echo $admin_base_url ?>account/account_list.php">Account List</a></li>
+                            <i class="fa fa fa-table"></i><a href="<?php echo $admin_base_url ?>account/account_list.php">Account List</a></li>
                     </ul>
+                </li>
+
+                <!-- Report Menu -->
+                <li class="<?php echo strpos($_SERVER['REQUEST_URI'], 'report') !== false ? 'active' : ''; ?>">
+                    <a href="<?php echo $admin_base_url . 'report/' ?>"> <i class="menu-icon fa fa-table"></i>Report </a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

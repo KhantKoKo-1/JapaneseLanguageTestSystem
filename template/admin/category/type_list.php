@@ -1,5 +1,5 @@
 <?php
-$title = 'Dashboard';
+$title = 'Type Table List';
 require_once ("../../../layout/admin/header.php");
 require_once ("../../../layout/admin/sidebar.php");
 require_once ("../../../layout/admin/nav.php");
@@ -53,7 +53,7 @@ if (isset($_GET['err'])) {
     <div class="col-sm-4">
         <div class="page-header float-left">
             <div class="page-title">
-                <h1>Type List</h1>
+                <h1><?php echo $title?></h1>
             </div>
         </div>
     </div>
@@ -62,7 +62,7 @@ if (isset($_GET['err'])) {
             <div class="page-title">
                 <ol class="breadcrumb text-right">
                     <li><a href="<?php echo $admin_base_url . 'dashboard/' ?>">Dashboard</a></li>
-                    <li class="active">Type List</li>
+                    <li class="active"><?php echo $title?></li>
                 </ol>
             </div>
         </div>
@@ -75,8 +75,12 @@ if (isset($_GET['err'])) {
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="col-11"><strong class="card-title">Type Table</strong></div>
-                        <div class="col-1"><a type="button" href="<?php echo $admin_base_url ?>category/type_form.php" class="btn btn-info">Create</a></div>
+                        <div class="col-10 col-md-10"><strong class="card-title">Type Table</strong></div>
+                        <div class="col-2 d-flex justify-content-end mt-1">
+                            <a href="<?php echo $admin_base_url ?>category/type_form.php" class="btn btn-success btn-xs">
+                                <i class="fa fa-plus-circle"></i> Create
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">

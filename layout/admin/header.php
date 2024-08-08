@@ -18,7 +18,7 @@ require_once ("../../../require/admin_authentication.php");
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="<?php echo $base_url;?>assets/common/images/favicon2.png">
 
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/vendors/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/vendors/bootstrap/dist/css/bootstrap5.3.min.css">
@@ -30,8 +30,6 @@ require_once ("../../../require/admin_authentication.php");
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/css/style.css">
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/css/custom_style.css">
-    <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'> -->
-    <link href="<?php echo $base_url;?>assets/admin/pnotify.all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/css/sweetalert/sweetalert.min.css">
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/common/css/vendors/font-awesome/css/font-awesome.min.css">
 

@@ -129,6 +129,7 @@ function create_table($mysqli)
         `start_time` TIME NOT NULL,
         `end_time` TIME NOT NULL,
         `is_correct` BOOLEAN NOT NULL,
+        `score` INT DEFAULT 0,
         `question_id` INT NOT NULL,
         `user_id` INT NOT NULL,
         `created_by` INT NOT NULL,

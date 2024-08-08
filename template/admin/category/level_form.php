@@ -17,8 +17,13 @@ $success         = false;
 $error           = false;
 
 if (isset($_GET['level_id'])) {
-    $level_id = $_GET['level_id'];
+    $level_id   = $_GET['level_id'];
     $level_data = get_level_by_id($mysqli, $level_id);
+    if ($level_data == NULL) {
+        $url =  $base_url . "template/error_pages/404.php";
+        echo '<meta http-equiv="refresh" content="0;url=' . $url . '">';
+        exit();
+    }
     $level_name  =  $level_data['level_name'];
  } else { 
     $level_id = '';
@@ -112,7 +117,9 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == 1) {
 
             <div class="card w-75 mt-5">
                 <div class="">
-                    <a href="<?php echo $admin_base_url ?>category/level_list.php" class="btn btn-secondary btn-sm">Back To List</a>
+                    <a href="<?php echo $admin_base_url ?>category/level_list.php" class="btn btn-info btn-sm mt-1">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </a>
                 </div>
                 <div class="card-header d-flex justify-content-center">
                     <?php if($level_id == "") {

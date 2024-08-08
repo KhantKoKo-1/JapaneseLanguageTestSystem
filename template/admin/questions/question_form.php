@@ -32,6 +32,11 @@ $invalid         = false;
 if (isset($_GET['question_id'])) {
     $question_id   = $_GET['question_id'];
     $question_data = get_question_by_id($mysqli, $question_id);
+    if ($question_data == NULL) {
+        $url =  $base_url . "template/error_pages/404.php";
+        echo '<meta http-equiv="refresh" content="0;url=' . $url . '">';
+        exit();
+    }
     $description   =  $question_data['description'];
     $level_id      =  $question_data['level_id'];
     $type_id       =  $question_data['type_id'];
@@ -214,7 +219,9 @@ if (isset($_POST['Submit'])) {
         <div class="card">
             <form action="" method="post" class="form-horizontal">
                 <div class="">
-                    <a href="<?php echo $admin_base_url ?>questions/question_list.php" class="btn btn-secondary btn-sm">Back To List</a>
+                    <a href="<?php echo $admin_base_url ?>questions/question_list.php" class="btn btn-info btn-sm ml-1 mt-1">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </a>
                 </div>
                 <div class="card-header d-flex justify-content-center">
                     <strong>Questions &nbsp;</strong> Form

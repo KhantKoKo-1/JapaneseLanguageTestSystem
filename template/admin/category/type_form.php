@@ -22,10 +22,15 @@ if(isset($_GET['type_id'])) {
     $type_id = $_GET['type_id'];
     $title = 'Edit Level Form';
     $type_data = get_type_by_id($mysqli, $type_id);
+    if ($type_data == NULL) {
+        $url =  $base_url . "template/error_pages/404.php";
+        echo '<meta http-equiv="refresh" content="0;url=' . $url . '">';
+        exit();
+    }
     $type_name  =  $type_data['type_name'];
  } else { 
     $type_id = '';
-    $title = 'Create Level Form';
+    $title = 'Create Type Form';
  }
 
 if (isset($_POST['Submit']) && $_POST['Submit'] == 1) {
@@ -113,7 +118,9 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == 1) {
         <div class="row justify-content-center">
             <div class="card w-75 mt-5">
                 <div class="">
-                    <a href="<?php echo $admin_base_url ?>category/type_list.php" class="btn btn-secondary btn-sm">Back To List</a>
+                    <a href="<?php echo $admin_base_url ?>category/type_list.php" class="btn btn-info btn-sm ml-1 mt-1">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </a>    
                 </div>
                 <div class="card-header d-flex justify-content-center">
                     <strong>Type &nbsp;</strong> Form
