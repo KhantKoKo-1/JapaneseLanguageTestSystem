@@ -1,7 +1,7 @@
 <?php
 require_once("../../../require/common.php");
 require_once("../../../config/db.php");
-require_once ("../../../require/authentication.php");
+require_once ("../../../require/admin_authentication.php");
 
 $level_id = (int)$_GET['level_id'];
 $date = date('Y-m-d H:i:s');

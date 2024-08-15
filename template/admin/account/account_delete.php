@@ -1,7 +1,7 @@
 <?php
 require_once("../../../require/common.php");
 require_once("../../../config/db.php");
-require_once ("../../../require/authentication.php");
+require_once ("../../../require/admin_authentication.php");
 
 $user_id = (int)$_GET['user_id'];
 $auth_id = isset($_SESSION['admin']['user_id'])             // Check if admin user_id is set in session
