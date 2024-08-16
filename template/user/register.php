@@ -118,24 +118,24 @@ if (isset($_POST['register'])) {
                             <form method="POST">
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input type="text" name="name" class="form-control p_input"
+                                    <input type="text" name="name" style="color:white" class="form-control p_input"
                                         value="<?php echo htmlspecialchars($name);?>">
                                     <p style="color:red"><?= $name_err ?></p>
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="text" name="email" class="form-control p_input"
+                                    <input type="text" name="email" style="color:white" class="form-control p_input"
                                         value="<?php echo htmlspecialchars($email);?>">
                                     <p style="color:red"><?= $email_err ?></p>
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" name="password" class="form-control p_input">
+                                    <input type="password" name="password" style="color:white" class="form-control p_input">
                                     <p style="color:red"><?= $password_err ?></p>
                                 </div>
                                 <div class="form-group">
                                     <label>Comfirm Password</label>
-                                    <input type="password" name="comfirm_password" class="form-control p_input">
+                                    <input type="password" name="comfirm_password" style="color:white" class="form-control p_input">
                                     <p style="color:red"><?= $comfirm_password_err ?>
                                   </p>
                                 </div>

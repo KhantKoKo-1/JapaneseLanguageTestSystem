@@ -380,6 +380,7 @@ require_once ("../../../layout/admin/footer.php");
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             var scoreInput = document.getElementById('score');
+            var descriptionInput = document.getElementById('description');
 
             scoreInput.addEventListener('input', function() {
                 // Remove all non-digit characters
@@ -389,12 +390,29 @@ require_once ("../../../layout/admin/footer.php");
                 var numericScore = Number(score);
                 
                 if (numericScore > 101) {
-                        score =  score.substring(0, 2);; // Set to 100 if greater
+                    score =  score.substring(0, 2);; // Set to 100 if greater
                 }
                 score = score.replace(/^0+/, '') || '0';
 
                 this.value = score;
             });
+            
+            document.getElementById('description').addEventListener('input', function(event) {
+                var inputText = event.target.value;
+                
+                // Regular expression to match Japanese characters (Hiragana, Katakana, Kanji) and some punctuation
+                var japaneseRegex = /^[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}ー々〆〤！？。、｢｣]*$/u;
+                
+                // Replace invalid characters with an empty string
+                var validText = inputText.replace(/[^\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}ー々〆〤！？。、｢｣]/gu, '');
+                // Update the input field with valid characters only
+                if (inputText !== validText) {
+                    this.value = validText;
+                }
+            });
+
+
+
         });
 
 

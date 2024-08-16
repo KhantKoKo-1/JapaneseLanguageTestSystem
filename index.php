@@ -125,13 +125,13 @@ if (isset($_POST['login'])) {
                 <?php } ?>
                 <div class="form-group">
                   <label>Email</label>
-                  <input type="text" class="form-control p_input" name="email" id="name"
+                  <input type="text" class="form-control" style="color:white" name="email" id="name"
                     value="<?php echo htmlspecialchars($email); ?>">
                   <p style="color:red"><?= $email_err ?></p>
                 </div>
                 <div class="form-group">
                   <label>Password</label>
-                  <input type="password" class="form-control p_input" name="password" id="pwd">
+                  <input type="password" class="form-control" style="color:white" name="password" id="pwd">
                   <p style="color:red"><?= $password_err ?></p>
                 </div>
                 <div class="form-group d-flex justify-content-center">

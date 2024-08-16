@@ -1,8 +1,9 @@
 <?php
 
 function getBaseURL() {
+    
     // Get the protocol
-    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://";
+    $protocol = isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'localhost') === 0 ? "http://" : "https://";
 
     // Get the host
     $host = $_SERVER['HTTP_HOST'];
