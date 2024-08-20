@@ -1,3 +1,8 @@
+
+body {
+  font-family: 'Roboto', sans-serif;
+} 
+
 /* The alert message box */
 .alert {
     padding: 20px;
@@ -30,8 +35,11 @@
   }
 
   .card{
-    background-color: #f7c8f3;
+    background-color: #f7f0f6;
     color: black;
     font-weight: bold;
   }
  
+  #title{
+    font-weight: bold;
+  }

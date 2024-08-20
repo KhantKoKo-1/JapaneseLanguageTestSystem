@@ -230,9 +230,9 @@ if (isset($_POST['Submit'])) {
                     <div class="row form-group">
                         <div class="col col-md-2"><label for="description"
                                 class="form-control-label">Description</label></div>
-                        <div class="col col-md-9"><textarea name="description" id="description" rows="6"
-                                placeholder="Content..." class="form-control"
-                                value="<?php echo $description; ?>"><?php echo $description; ?></textarea>
+                        <div class="col col-md-9"><textarea name="description" id="description" placeholder="Enter Japanese text only" rows="6"
+                                placeholder="Content..." class="form-control" oninput="allowJapaneseIMEText(event)" autocomplete="off"
+                                value="<?php echo $description; ?>"><?php echo htmlspecialchars($description, ENT_QUOTES, 'UTF-8'); ?></textarea>
                             <!-- <span class="help-block">Please enter your Level Name</span> -->
                             <?php if ($description_err !== '') { ?>
                             <span class="help-block text-danger"><?php echo $description_err; ?></span>
@@ -378,43 +378,25 @@ require_once ("../../../layout/admin/footer.php");
 ?>
 
 <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var scoreInput = document.getElementById('score');
-            var descriptionInput = document.getElementById('description');
+document.addEventListener('DOMContentLoaded', function() {
+    var scoreInput = document.getElementById('score');
 
-            scoreInput.addEventListener('input', function() {
-                // Remove all non-digit characters
-                var score = this.value.replace(/\D/g, '');
-                
-                // Limit the length to 9 digits
-                var numericScore = Number(score);
-                
-                if (numericScore > 101) {
-                    score =  score.substring(0, 2);; // Set to 100 if greater
-                }
-                score = score.replace(/^0+/, '') || '0';
+    scoreInput.addEventListener('input', function() {
+        // Remove all non-digit characters
+        var score = this.value.replace(/\D/g, '');
+        
+        // Limit the length to 9 digits
+        var numericScore = Number(score);
+        
+        if (numericScore > 101) {
+            score =  score.substring(0, 2);; // Set to 100 if greater
+        }
+        score = score.replace(/^0+/, '') || '0';
 
-                this.value = score;
-            });
-            
-            document.getElementById('description').addEventListener('input', function(event) {
-                var inputText = event.target.value;
-                
-                // Regular expression to match Japanese characters (Hiragana, Katakana, Kanji) and some punctuation
-                var japaneseRegex = /^[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}ー々〆〤！？。、｢｣]*$/u;
-                
-                // Replace invalid characters with an empty string
-                var validText = inputText.replace(/[^\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}ー々〆〤！？。、｢｣]/gu, '');
-                // Update the input field with valid characters only
-                if (inputText !== validText) {
-                    this.value = validText;
-                }
-            });
-
-
-
-        });
-
+        this.value = score;
+    });
+    
+});
 
 const container = document.getElementById('inputFieldsContainer');
 let addButton = document.getElementById('addQuiz');
@@ -422,6 +404,16 @@ let showQuizsContainer = document.getElementById('showQuizs');
 let chidShowQuizsContainer = document.getElementById('childShowquiz');
 handleModalClose();
 const names = ['A', 'B', 'C', 'D'];
+
+function allowJapaneseIMEText(event) {
+    const regex = /^[\u3040-\u30FF\u4E00-\u9FFF\uFF66-\uFF9D\u3000-\u303F\uFF00-\uFFEF\s]+$/;
+    const inputField = event.target;
+    const inputValue = inputField.value;
+
+    if (!regex.test(inputValue)) {
+        inputField.value = inputValue.replace(/[^\u3040-\u30FF\u4E00-\u9FFF\uFF66-\uFF9D\u3000-\u303F\uFF00-\uFFEF\s]/g, '');
+    }
+}
 
 function addQuizs() {
 
@@ -464,6 +456,7 @@ function addQuizs() {
         input.name = 'quiz_' + names[index]; // Assign a name from the names array
         input.placeholder = 'Quiz ' + names[index];
         input.classList.add('form-control'); // Add form-control class
+        input.oninput = function(event) { allowJapaneseIMEText(event); };
 
         // Append input to column fnames[index]or input field
         colInputDiv.appendChild(input);
@@ -569,8 +562,8 @@ function handleModalClose() {
                 </div>
                 <div class="col-2">
                     <div class="form-check mt-2">
-                        <input type="checkbox" id="${key}_correct" name="correct_answer[]" value="${quizValues[key]}" ${isChecked} class="form-check-input quizes_status" onchange="handleCheckboxChange(this)">
-                        <label for="${key}_correct" class="form-check-label">Correct</label>
+                        <input style="cursor:pointer;" type="checkbox" id="${key}_correct" name="correct_answer[]" value="${quizValues[key]}" ${isChecked} class="form-check-input quizes_status" onchange="handleCheckboxChange(this)">
+                        <label style="cursor:pointer;" for="${key}_correct" class="form-check-label">Correct</label>
                     </div>
                 </div>
             </div>

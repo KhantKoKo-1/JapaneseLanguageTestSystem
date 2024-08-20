@@ -32,6 +32,7 @@ require_once ("../../require/user_authentication.php");
 
         <!-- Template Stylesheet -->
         <link href="<?php echo $base_url?>/assets/user/css/style.css" rel="stylesheet">
+        <link href="<?php echo $base_url; ?>assets/fonts/google-font.css" rel="stylesheet">
 
     </head>
 

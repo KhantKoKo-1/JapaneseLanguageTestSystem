@@ -106,6 +106,8 @@ if (isset($_POST['login'])) {
   <link rel="stylesheet" href="<?php echo $base_url; ?>assets/common/css/custom_style.css">
   <!-- End layout styles -->
   <link rel="shortcut icon" href="<?php echo $base_url; ?>assets/common/images/favicon.png" />
+  <link href="<?php echo $base_url; ?>assets/fonts/google-font.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -115,7 +117,7 @@ if (isset($_POST['login'])) {
         <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
           <div class="card col-lg-4 mx-auto">
             <div class="card-body px-5 py-5">
-              <h3 class="card-title d-flex justify-content-center text-left mb-3 text-dark" stt>Login</h3>
+              <h3 id="title" class="card-title d-flex justify-content-center text-left mb-3 text-dark" stt>Login</h3>
               <form method="post">
                 <?php if ($invalid) { ?>
                   <div class="alert">
@@ -136,7 +138,7 @@ if (isset($_POST['login'])) {
                 </div>
                 <div class="form-group d-flex justify-content-center">
                   <div class="form-check">
-                    <input type="checkbox" class="form-check-input" value="1" name="remember" id="remember" <?php if ($remember == '1') {
+                    <input type="checkbox" style="cursor:pointer;" class="form-check-input" value="1" name="remember" id="remember" <?php if ($remember == '1') {
                       echo "checked";
                     } ?>>
                     <label id="remember-label" for="remember" class="form-check-label">Remember Me</label>

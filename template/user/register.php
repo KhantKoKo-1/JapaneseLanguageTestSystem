@@ -99,6 +99,7 @@ if (isset($_POST['register'])) {
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/common/css/style.css">
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/common/css/custom_style.css">
     <link rel="shortcut icon" href="<?php echo $base_url;?>assets/common/images/favicon.png" />
+    <link href="<?php echo $base_url; ?>assets/fonts/google-font.css" rel="stylesheet">
 </head>
 
 <body>
@@ -108,7 +109,7 @@ if (isset($_POST['register'])) {
                 <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
                     <div class="card col-lg-4 mx-auto">
                         <div class="card-body px-5 py-5">
-                            <h3 class="card-title text-left mb-3 d-flex justify-content-center text-dark">Register</h3>
+                            <h3 id="title" class="card-title text-left mb-3 d-flex justify-content-center text-dark">Register</h3>
                             <?php if($invalid) {?>
                             <div class="alert">
                                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -145,8 +146,8 @@ if (isset($_POST['register'])) {
                                 </div>
                                 <p class="sign-up text-center">Already have an Account?<a
                                         href="<?php echo $base_url;?>"> Sign In</a></p>
-                                <p class="terms">By creating an account you are accepting our<a href="#"> Terms &
-                                        Conditions</a></p>
+                                <!-- <p class="terms">By creating an account you are accepting our<a href="#"> Terms &
+                                        Conditions</a></p> -->
                             </form>
                         </div>
                     </div>
