@@ -33,7 +33,8 @@ require_once ("../../require/user_authentication.php");
         <!-- Template Stylesheet -->
         <link href="<?php echo $base_url?>/assets/user/css/style.css" rel="stylesheet">
         <link href="<?php echo $base_url; ?>assets/fonts/google-font.css" rel="stylesheet">
-
+        <link rel="apple-touch-icon" sizes="180x180" href="<?php echo $base_url;?>assets/common/images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="<?php echo $base_url;?>assets/common/images/favicon-32x32.png">
     </head>
 
 <body>

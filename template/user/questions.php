@@ -73,13 +73,24 @@ if ($error) {
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Test Your Skills</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo $base_url;?>assets/common/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo $base_url;?>assets/common/images/favicon-32x32.png">
+    <link href="<?php echo $base_url; ?>assets/fonts/google-font.css?family=Roboto+Slab" rel="stylesheet">
     <link href="<?php echo $base_url?>/assets/user/css/question_style.css" rel="stylesheet">
     <link href="<?php echo $base_url?>/assets/user/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/css/sweetalert/sweetalert.min.css">
+    <style>
+        .color-title {
+            color: black !important;  /* Ensure that the color is applied with high specificity */
+            background-color: gold !important;
+            font-size: 24px; /* Adjust font size if needed */
+            font-weight: bold; /* Make the title bold */
+        }   
+    </style>
 </head>
 
 <body>
+    <input type="hidden" id="time-selection">
     <div class="parent-container d-flex justify-content-center" style="height: 90vh;">
         <!-- result sections -->
         <div class="final-result">
@@ -97,6 +108,11 @@ if ($error) {
                 </div>
                 <div class="right-result">
                     <h3>Test Result</h3>
+                    <div class="item" style="--i:#4caf50; --j:#388e3c">
+                        <i class="fa"></i>
+                        <h5>Remain Time</h5>
+                        <h5 id="remaining-time"></h5>
+                    </div>
                     <div class="item" style="--i:#4e0fed1f; --j:#2b0785">
                         <i class="fa fa-openid"></i>
                         <h5>Solved Question</h5>
@@ -135,6 +151,7 @@ if ($error) {
             <div class="card-body">
                 <a href="<?php echo $user_base_url ."type.php?level_id=" . $level_id ?>" class="btn btn-danger">Back</a>
                 <span class="d-flex justify-content-end">Start Time : <b id="start_time"></b></span>
+                <span class="d-flex justify-content-end">Duration : <b id="duration"></b></span>
                 
                 <div class="row g-5 align-items-center">
                     <div class="quiz">
@@ -173,6 +190,85 @@ if ($error) {
     const user_base_url = "<?php echo $user_base_url; ?>";
     const level_id = "<?php echo $level_id?>";
     var questions  = <?php echo json_encode($questionData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS); ?>;
+    var background_img_url =  base_url + "assets/common/images/time.jpg";
+    var gif_img_url =  base_url + "assets/common/images/d533amv-ce8cbc9f-1ecd-4231-b5a6-b1002e188b16.gif";
+    
+    Swal.fire({
+    title: "Select Time",
+    width: 600,
+    padding: "3em",
+    color: "#716add",
+    background: `#fff url(${background_img_url})`,
+    backdrop: `
+        rgba(0,0,123,0.4)
+        url(${gif_img_url})
+        left top
+        no-repeat
+    `,
+    customClass: {
+        title: 'color-title'  // Apply custom class to the title
+    },
+    html: `
+        <select style='color: #f6fa0a;font-weight:bold;background-color:black' id="timeSelection" class="swal2-input">
+            <option value="unlimited">Unlimited</option>
+            <option value="1">1 min</option>
+            <option value="5">5 min</option>
+            <option value="10">10 min</option>
+            <option value="15">15 min</option>
+            <option value="20">20 min</option>
+            <option value="25">25 min</option>
+            <option value="30">30 min</option>
+        </select>
+    `,
+
+    allowOutsideClick: false,
+    confirmButtonText: "Select",
+    preConfirm: () => {
+        const time = document.getElementById('timeSelection').value;
+        return time;
+    }
+}).then((result) => {
+    if (result.isConfirmed) {
+        let selectedTime = result.value;
+        
+        // Handle countdown only for limited times (skip "unlimited")
+        if (selectedTime !== 'unlimited') {
+            selectedTime = parseInt(selectedTime); // Convert to number in minutes
+            let timeInSeconds = selectedTime * 60; // Convert minutes to seconds
+
+            // Get the element where the countdown will be displayed
+            let timeSection = document.getElementById('duration');
+
+            // Start countdown
+            const countdownInterval = setInterval(() => {
+                // Calculate minutes and seconds remaining
+                let minutes = Math.floor(timeInSeconds / 60);
+                let seconds = timeInSeconds % 60;
+
+                // Display the countdown
+                timeSection.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+
+                // Decrease time
+                timeInSeconds--;
+
+                // Stop the countdown when it reaches zero
+                if (timeInSeconds < 0) {
+                    clearInterval(countdownInterval);
+                    timeSection.textContent = "Time's up!";
+                    document.querySelector("#continue").style.display="none";
+                    document.querySelector("#backBtn").style.display="block";
+                    document.querySelector('.view-results').click();
+                }
+            }, 1000); // 1000ms interval for 1 second updates
+        } else {
+            // Handle the "unlimited" case
+            let timeSection = document.getElementById('duration');
+            timeSection.textContent = "Unlimited Time.";
+        }
+    }
+});
+
+
 </script>
 <script src="<?php echo $base_url . "assets\user\js\question.js"?>"></script>
 </html>

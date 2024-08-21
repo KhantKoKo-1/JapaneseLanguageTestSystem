@@ -17,9 +17,6 @@ require_once ("../../../require/admin_authentication.php");
     <!-- <meta name="description" content="Sufee Admin - HTML5 Admin Template"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="shortcut icon" href="<?php echo $base_url;?>assets/common/images/favicon2.png">
-
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo $base_url;?>assets/common/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo $base_url;?>assets/common/images/favicon-32x32.png">
 

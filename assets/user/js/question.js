@@ -202,6 +202,7 @@ function addFinalResult(solvedQuestionCount) {
         inCorrectCount = inCorrectElement.length;
     }
 
+    document.getElementById("remaining-time").innerHTML = document.getElementById('duration').textContent;
     document.getElementById("final-score").innerHTML = finalScore + "/" + totalScore;
     document.getElementById("main-score").innerHTML = scorePercentage + '%';
     document.getElementById("correct-answer").innerHTML = correctCount + "/" + questions.length;;
@@ -226,7 +227,7 @@ document.getElementById("restart").addEventListener("click",function(){
 
 document.getElementById("backBtn").addEventListener("click",function(){
     const url = user_base_url + "type.php?level_id=" + level_id;
-        window.location.href = url; 
+    window.location.href = url; 
 });
 
 document.getElementById("continue").addEventListener("click",function(){

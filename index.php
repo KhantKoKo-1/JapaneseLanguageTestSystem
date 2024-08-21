@@ -105,9 +105,8 @@ if (isset($_POST['login'])) {
   <link rel="stylesheet" href="<?php echo $base_url; ?>assets/common/css/style.css">
   <link rel="stylesheet" href="<?php echo $base_url; ?>assets/common/css/custom_style.css">
   <!-- End layout styles -->
-  <link rel="shortcut icon" href="<?php echo $base_url; ?>assets/common/images/favicon.png" />
-  <link href="<?php echo $base_url; ?>assets/fonts/google-font.css" rel="stylesheet">
-
+  <link rel="apple-touch-icon" sizes="180x180" href="<?php echo $base_url;?>assets/common/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="<?php echo $base_url;?>assets/common/images/favicon-32x32.png">
 </head>
 
 <body>
