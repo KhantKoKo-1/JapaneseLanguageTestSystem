@@ -54,7 +54,7 @@ require_once("../../../layout/admin/nav.php");
                 <p class="text-light"> Category </p>
 
                 <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                    <canvas id="widgetChart1"></canvas>
+                    <canvas id="widgetChart"></canvas>
                 </div>
 
             </div>
@@ -65,7 +65,7 @@ require_once("../../../layout/admin/nav.php");
 
 
     <div class="col-sm-6 col-lg-4">
-        <div class="card text-white bg-flat-color-3">
+        <div class="card text-white bg-flat-color-1">
             <div class="card-body pb-0">
                 <div class="dropdown float-right">
                     <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
@@ -96,7 +96,7 @@ require_once("../../../layout/admin/nav.php");
     <!--/.col-->
 
     <div class="col-sm-6 col-lg-4">
-        <div class="card text-white bg-flat-color-4">
+        <div class="card text-white bg-flat-color-1">
             <div class="card-body pb-0">
                 <div class="dropdown float-right">
                     <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
@@ -125,17 +125,16 @@ require_once("../../../layout/admin/nav.php");
         </div>
     </div>
     <div class="col-sm-6 col-lg-4">
-        <a href="<?php echo $admin_base_url ?>report/index.php" class="card text-white bg-flat-color-5"
+        <a href="<?php echo $admin_base_url ?>report/index.php" class="card text-white bg-flat-color-1"
             style="cursor:pointer;">
             <div class="card-body pb-0">
-
                 <h4 class="mb-0">
                     <span class="count">1</span>
                 </h4>
                 <p class="text-light">Report</p>
 
                 <div class="chart-wrapper px-3" style="height:70px;" height="70">
-                    <canvas id="widgetChart4"></canvas>
+                    <canvas id="widgetChart"></canvas>
                 </div>
 
             </div>

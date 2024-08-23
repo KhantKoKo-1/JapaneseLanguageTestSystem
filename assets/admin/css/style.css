@@ -4901,16 +4901,15 @@ body.open .navbar .navbar-brand.hidden {
 
 /* Right panel */
 .right-panel {
-  background: url("../images/tower-wall-photo.jpg") no-repeat;
-  background-size: cover;
   display: table-cell;
+  background-color: #edece8;
   padding-left: 0 !important;
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
 }
 
 .right-panel .breadcrumbs {
-  background-color: #faf7ed;
+  background-color: #fff;
   display: inline-block;
   margin-top: 0;
   padding: 0 5px;
@@ -4923,7 +4922,7 @@ body.open .navbar .navbar-brand.hidden {
   min-height: 50px;
   margin: 0;
   padding: 0 15px;
-  background: #faf7ed;
+  background: #fff;
   border-bottom: 0;
 }
 .right-panel .page-header h1 {
@@ -4933,7 +4932,7 @@ body.open .navbar .navbar-brand.hidden {
 .right-panel .page-header .breadcrumb {
   margin: 0;
   padding: 13.5px 0;
-  background: #faf7ed;
+  background: #fff;
   text-transform: capitalize;
 }
 .right-panel .page-header .breadcrumb > li + li:before {
@@ -4943,8 +4942,8 @@ body.open .navbar .navbar-brand.hidden {
 }
 
 .right-panel header.header {
-  background: #faf7ed;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  background: #5359fe;
+  box-shadow: 0 1px 1px rgba(14, 11, 11, 0.15);
   clear: both;
   display: inline-block;
   padding: 15px 20px 13px;
@@ -5257,7 +5256,7 @@ header .form-inline .search-form.close {
   margin-bottom: 24px;
   margin-bottom: 1.5rem;
   border-radius: 1.2rem;
-  /* background: #faf7ed;  */
+  /* background:#fff;  */
 }
 .card h4 {
   font-size: 17.6px;
