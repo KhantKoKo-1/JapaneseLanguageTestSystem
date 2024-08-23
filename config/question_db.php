@@ -34,6 +34,17 @@ function get_question_by_id($mysqli, $question_id) {
     if ($result) return $result->fetch_assoc();
 }
 
+function get_valid_type_id_by_level_id($mysqli, $level_id) {
+    $level_id = intval($level_id);
+    $sql = "SELECT 
+            `type_id`
+            FROM `questions` 
+            WHERE `level_id` = $level_id AND `deleted_by` IS NULL";
+
+    $result = $mysqli->query($sql);
+    return $result;
+}
+
 function get_question_by_level_id_and_type_id($mysqli, $level_id, $type_id) {
     $level_id = intval($level_id);
     $type_id  = intval($type_id);

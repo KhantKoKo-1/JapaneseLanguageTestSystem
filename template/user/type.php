@@ -4,6 +4,7 @@ require_once("../../layout/user/header.php");
 require_once("../../layout/user/nav.php");
 require_once("../../config/type_db.php");
 require_once("../../config/level_db.php");
+require_once("../../config/question_db.php");
 
 $types   = get_all_types($mysqli);
 $level_id = '';
@@ -15,6 +16,16 @@ if (isset($_GET['level_id'])) {
         $url =  $base_url . "template/error_pages/404.php";
         echo '<meta http-equiv="refresh" content="0;url=' . $url . '">';
         exit();
+    }
+}
+
+$questions = get_valid_type_id_by_level_id($mysqli, $level_id);
+$allow_type_ids = [];
+
+while ($question = $questions->fetch_assoc()) {
+    $valid_type_id = $question['type_id'];
+    if (!in_array($valid_type_id, $allow_type_ids)) {
+        $allow_type_ids[] = $valid_type_id;
     }
 }
 
@@ -35,15 +46,17 @@ if (isset($_GET['level_id'])) {
                                 class="img-fluid rounded-top w-100" alt="src">
                         </div>
                         <div class="col-lg-9 wow fadeInRight" data-wow-delay="0.4s">
-                        <?php while ($type = $types->fetch_assoc()) {
+                            <?php while ($type = $types->fetch_assoc()) {
                             $type_id   = $type['type_id'];
                             $type_name = $type['type_name'];
-                        ?> 
-                            <a href="<?php echo $user_base_url ."questions.php?level_id=" .$level_id ."&type_id=" . $type_id?>" class="mb-2">
+                            if (in_array($type_id, $allow_type_ids)) {
+                            ?>
+                            <a href="<?php echo $user_base_url ."questions.php?level_id=" .$level_id ."&type_id=" . $type_id?>"
+                                class="mb-2">
                                 <button type="button" class="btn btn-primary btn-lg mb-2"
                                     style="width: 100%;"><?php echo $type_name ?></button>
-                        </a>
-                        <?php } ?>
+                            </a>
+                            <?php } } ?>
                         </div>
                     </div>
                 </div>

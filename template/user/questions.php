@@ -73,19 +73,24 @@ if ($error) {
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Test Your Skills</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo $base_url;?>assets/common/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo $base_url;?>assets/common/images/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="<?php echo $base_url;?>assets/common/images/apple-touch-icon1.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="<?php echo $base_url;?>assets/common/images/favicon-32x32-1.png">
     <link href="<?php echo $base_url; ?>assets/fonts/google-font.css?family=Roboto+Slab" rel="stylesheet">
     <link href="<?php echo $base_url?>/assets/user/css/question_style.css" rel="stylesheet">
     <link href="<?php echo $base_url?>/assets/user/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $base_url;?>assets/admin/css/sweetalert/sweetalert.min.css">
     <style>
-        .color-title {
-            color: black !important;  /* Ensure that the color is applied with high specificity */
-            background-color: gold !important;
-            font-size: 24px; /* Adjust font size if needed */
-            font-weight: bold; /* Make the title bold */
-        }   
+    .color-title {
+        color: black !important;
+        /* Ensure that the color is applied with high specificity */
+        background-color: gold !important;
+        font-size: 24px;
+        /* Adjust font size if needed */
+        font-weight: bold;
+        /* Make the title bold */
+    }
     </style>
 </head>
 
@@ -152,7 +157,7 @@ if ($error) {
                 <a href="<?php echo $user_base_url ."type.php?level_id=" . $level_id ?>" class="btn btn-danger">Back</a>
                 <span class="d-flex justify-content-end">Start Time : <b id="start_time"></b></span>
                 <span class="d-flex justify-content-end">Duration : <b id="duration"></b></span>
-                
+
                 <div class="row g-5 align-items-center">
                     <div class="quiz">
                         <div id="info">
@@ -176,24 +181,25 @@ if ($error) {
 
                     </div>
                 </div>
-                </div>
             </div>
         </div>
     </div>
-    
+    </div>
+
     <script src="<?php echo $base_url;?>assets/common/js/jquery/jquery-3.7.1.js"></script>
     <script src="<?php echo $base_url?>/assets/user/js/bootstrap.bundle.min.js"></script>
     <script src="<?php echo $base_url;?>assets/common/js/sweetalert/sweetalert2.all.min.js"></script>
 </body>
 <script>
-    const base_url = "<?php echo $base_url; ?>";
-    const user_base_url = "<?php echo $user_base_url; ?>";
-    const level_id = "<?php echo $level_id?>";
-    var questions  = <?php echo json_encode($questionData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS); ?>;
-    var background_img_url =  base_url + "assets/common/images/time.jpg";
-    var gif_img_url =  base_url + "assets/common/images/d533amv-ce8cbc9f-1ecd-4231-b5a6-b1002e188b16.gif";
-    
-    Swal.fire({
+const base_url = "<?php echo $base_url; ?>";
+const user_base_url = "<?php echo $user_base_url; ?>";
+const level_id = "<?php echo $level_id?>";
+var questions =
+    <?php echo json_encode($questionData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS); ?>;
+var background_img_url = base_url + "assets/common/images/time.jpg";
+var gif_img_url = base_url + "assets/common/images/d533amv-ce8cbc9f-1ecd-4231-b5a6-b1002e188b16.gif";
+
+Swal.fire({
     title: "Select Time",
     width: 600,
     padding: "3em",
@@ -206,7 +212,7 @@ if ($error) {
         no-repeat
     `,
     customClass: {
-        title: 'color-title'  // Apply custom class to the title
+        title: 'color-title' // Apply custom class to the title
     },
     html: `
         <select style='color: #f6fa0a;font-weight:bold;background-color:black' id="timeSelection" class="swal2-input">
@@ -230,7 +236,7 @@ if ($error) {
 }).then((result) => {
     if (result.isConfirmed) {
         let selectedTime = result.value;
-        
+
         // Handle countdown only for limited times (skip "unlimited")
         if (selectedTime !== 'unlimited') {
             selectedTime = parseInt(selectedTime); // Convert to number in minutes
@@ -255,8 +261,8 @@ if ($error) {
                 if (timeInSeconds < 0) {
                     clearInterval(countdownInterval);
                     timeSection.textContent = "Time's up!";
-                    document.querySelector("#continue").style.display="none";
-                    document.querySelector("#backBtn").style.display="block";
+                    document.querySelector("#continue").style.display = "none";
+                    document.querySelector("#backBtn").style.display = "block";
                     document.querySelector('.view-results').click();
                 }
             }, 1000); // 1000ms interval for 1 second updates
@@ -267,8 +273,7 @@ if ($error) {
         }
     }
 });
-
-
 </script>
 <script src="<?php echo $base_url . "assets\user\js\question.js"?>"></script>
+
 </html>
