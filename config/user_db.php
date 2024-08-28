@@ -13,7 +13,7 @@ function count_user($mysqli)
 
 function get_all_users($mysqli, $user_id)
 {
-    $sql = "SELECT * FROM `users` WHERE `user_id` != '$user_id' AND `deleted_by` IS NULL";
+    $sql = "SELECT * FROM `users` WHERE `user_id` != '$user_id' AND `deleted_by` IS NULL ORDER BY user_id DESC";
     $result = $mysqli->query($sql);
     return $result;
 }
@@ -63,4 +63,3 @@ function update_user_info($mysqli, $name, $email, $role, $updated_by , $id)
     }
     return false;
 }
-

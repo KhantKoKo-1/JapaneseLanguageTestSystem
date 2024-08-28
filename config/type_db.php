@@ -2,7 +2,7 @@
 
 function get_all_types($mysqli)
 {
-    $sql = "SELECT * FROM `type` WHERE `deleted_at` IS NULL";
+    $sql = "SELECT * FROM `type` WHERE `deleted_at` IS NULL ORDER BY `type_id` DESC";
     $result = $mysqli->query($sql);
     return $result;
 }

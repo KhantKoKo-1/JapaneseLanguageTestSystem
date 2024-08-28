@@ -271,7 +271,7 @@ if (isset($_POST['register']) && $_POST['register'] == 2) {
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
                             <input type="password" id="comfirm_password" name="comfirm_password"
-                                placeholder="comfirm_password" class="form-control"
+                                placeholder="Comfirm Password" class="form-control"
                                 value="<?php echo $comfirm_password ?>">
                             <div class="input-group-addon"><span style="cursor: pointer;"
                                     onclick="togglePasswordVisibility(2)"><i id="eye-icon2"

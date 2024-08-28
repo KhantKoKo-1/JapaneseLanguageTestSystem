@@ -44,7 +44,9 @@ function get_all_answers_info($mysqli) {
             WHERE 
                 ans.deleted_by IS NULL
             GROUP BY 
-                ans.answer_no, user.email";
+                ans.answer_no, user.email
+            ORDER BY 
+                ans.answer_id DESC";
 
     $result = $mysqli->query($sql);
     return $result;
