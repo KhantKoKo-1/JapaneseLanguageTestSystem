@@ -44,11 +44,20 @@ if ($error) {
         $choices = [];
         $correct_answer_index = 0;
         $i       = 0;
+        $correct_name = '';
     
         // Collect all choices for the current question
         while ($quiz = $quizzes->fetch_assoc()) {
             $choices[] = $quiz['description'];
             if ($quiz['is_correct'] == True) {
+                $correct_name = $quiz['description'];
+            }
+            
+        }
+        
+        shuffle($choices);
+        foreach ($choices as $choice) {
+            if ($choice == $correct_name) {
                 $correct_answer_index = $i;
             }
             $i++;
