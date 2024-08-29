@@ -61,6 +61,38 @@ function get_question_by_level_id_and_type_id($mysqli, $level_id, $type_id) {
     return $result;
 }
 
+function get_question_count_by_level_id($mysqli, $level_id) {
+    $level_id = intval($level_id);
+
+    $sql = "SELECT COUNT(question_id) AS question_count FROM `questions` WHERE `level_id` = $level_id AND deleted_by IS NULL";
+
+    $result = $mysqli->query($sql);
+    
+    // Fetch the count from the result set
+    if ($result) {
+        $row = $result->fetch_assoc();
+        return $row['question_count'];
+    } else {
+        return 0; // Or handle the error as needed
+    }
+}
+
+function get_question_count_by_type_id($mysqli, $type_id) {
+    $type_id = intval($type_id);
+
+    $sql = "SELECT COUNT(question_id) AS question_count FROM `questions` WHERE `type_id` = $type_id AND deleted_by IS NULL";
+
+    $result = $mysqli->query($sql);
+    
+    // Fetch the count from the result set
+    if ($result) {
+        $row = $result->fetch_assoc();
+        return $row['question_count'];
+    } else {
+        return 0; // Or handle the error as needed
+    }
+}
+
 function save_questions($mysqli, $description, $level_id, $type_id, $score, $created_by) {
     $currentDateTime = date('Y-m-d H:i:s');
     $level_id   = intval($level_id);

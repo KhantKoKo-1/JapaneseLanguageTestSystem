@@ -4,6 +4,7 @@ require_once ("../../../layout/admin/header.php");
 require_once ("../../../layout/admin/sidebar.php");
 require_once ("../../../layout/admin/nav.php");
 require_once("../../../config/level_db.php");
+require_once("../../../config/question_db.php");
 
 $levels = get_all_levels($mysqli);
 $i = 0;
@@ -78,7 +79,8 @@ if (isset($_GET['err'])) {
                     <div class="card-header">
                         <div class="col-10"><strong class="card-title">Level Table</strong></div>
                         <div class="col-2 d-flex justify-content-end mt-1">
-                            <a href="<?php echo $admin_base_url ?>category/level_form.php" class="btn btn-success btn-xs">
+                            <a href="<?php echo $admin_base_url ?>category/level_form.php"
+                                class="btn btn-success btn-xs">
                                 <i class="fa fa-plus-circle"></i> Create
                             </a>
                         </div>
@@ -93,22 +95,27 @@ if (isset($_GET['err'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php while ($level = $levels->fetch_assoc()) {
+                                <?php while ($level = $levels->fetch_assoc()) {
                                 $level_id       = $level['level_id'];
                                 $edit_url       = $admin_base_url . "category/level_form.php?level_id=" . $level_id;
                                 $delete_url     = $admin_base_url . "category/level_delete.php?level_id=" . $level_id;
-                            ?> 
-                            <tr>
-                                <td><?php echo $i + 1 ?></td>
-                                <td><?php echo $level['level_name']; ?></td>
-                                <td>
-                                    <a href="<?php echo $edit_url?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="confirmDelete('<?php echo $delete_url; ?>')">
-                                        <i class="fa fa-trash-o"></i> Delete
-                                    </a>
-                                </td>    
-                            </tr>
-                            <?php $i++; } ?>    
+                                $question_count = get_question_count_by_level_id($mysqli, $level_id);
+                            ?>
+                                <tr>
+                                    <td><?php echo $i + 1 ?></td>
+                                    <td><?php echo $level['level_name']; ?></td>
+                                    <td>
+                                        <a href="<?php echo $edit_url?>" class="btn btn-info btn-sm"><i
+                                                class="fa fa-pencil"></i> Edit </a>
+                                        <?php if ($question_count == 0) {?>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm"
+                                            onclick="confirmDelete('<?php echo $delete_url; ?>')">
+                                            <i class="fa fa-trash-o"></i> Delete
+                                        </a>
+                                        <?php } ?>
+                                    </td>
+                                </tr>
+                                <?php $i++; } ?>
                             </tbody>
                         </table>
                     </div>
