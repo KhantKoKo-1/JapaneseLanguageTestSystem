@@ -69,9 +69,9 @@ function save_answer($mysqli, $answer_data, $user_id) {
     if ($mysqli->query($sql)) {
         // Step 2: Retrieve the insert ID
         $insert_id = $mysqli->insert_id;
-        
+        $formatted_answer_date = (new DateTime($answer_date))->format('Ymd');
         // Step 3: Generate `answer_no` based on insert_id, answer_date, question_id, user_id
-        $answer_no = "JLPT_" . $insert_id . '_' . $answer_date . '_' . $question_id . '_' . $user_id;
+        $answer_no = "JLPT-" . $insert_id . $formatted_answer_date . $question_id . $user_id;
 
         // Update the record with the generated `answer_no`
         $update_sql = "UPDATE `answers` SET `answer_no` = '$answer_no' WHERE `answer_id` = $insert_id";
