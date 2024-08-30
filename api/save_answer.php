@@ -11,9 +11,14 @@ $data = json_decode(file_get_contents('php://input'), true);
 $answer_result = save_answer($mysqli, $data, $user_id);
 
 if ($answer_result) {
- echo json_encode([
-    'status' => 'success',
-    'data' => $data
+    echo json_encode([
+        'status' => 'success',
+        'data' => $data
+    ]);
+} else {
+    echo json_encode([
+        'status' => 'fail',
+        'message' => "fail save answer!"
     ]);
 }
 

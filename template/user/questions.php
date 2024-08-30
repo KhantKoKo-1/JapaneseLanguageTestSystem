@@ -64,11 +64,11 @@ if ($error) {
         }
     
         $questionData[] = [
-            'question_id'=> $question_id,
-            'question'   => $description,
-            'score'      => $score,
-            'choices'    => $choices,
-            'answer'     => $correct_answer_index
+            'question_id' => $question_id,
+            'question'    => $description,
+            'score'       => $score,
+            'choices'     => $choices,
+            'answer'      => $correct_answer_index
         ];
     }
     // Encode the array as JSON

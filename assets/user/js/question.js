@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 })
 
 const totalScore = calculateTotalScore();
-const answerNo = generateAnswerNo();
+// const answerNo = generateAnswerNo();
 const now = new Date();
 const answerDate = now.getFullYear() + '-' +
                     String(now.getMonth() + 1).padStart(2, '0') + '-' +
@@ -26,16 +26,16 @@ function calculateTotalScore() {
     return total;
 }
 
-function generateAnswerNo() {
-    const baseString = "JLPT";
+// function generateAnswerNo() {
+//     const baseString = "JLPT";
 
-    // Optionally, add additional logic to generate a unique or specific answer number
-    // For example, adding a random number or timestamp to the base string
-    const uniqueSuffix = Math.floor(Math.random() * 1000000); // Random number between 0 and 999
+//     // Optionally, add additional logic to generate a unique or specific answer number
+//     // For example, adding a random number or timestamp to the base string
+//     const uniqueSuffix = Math.floor(Math.random() * 1000000); // Random number between 0 and 999
 
-    // Combine the base string with the unique suffix
-    return `${baseString}-${uniqueSuffix}`
-}
+//     // Combine the base string with the unique suffix
+//     return `${baseString}-${uniqueSuffix}`
+// }
 
 function getCurrentDateTime() {
     const now = new Date();
@@ -139,7 +139,7 @@ document.querySelector(".submit-answer").addEventListener("click",function(){
         },
         body: JSON.stringify({
             answer_date : answerDate,
-            answer_no : answerNo,
+            // answer_no : answerNo,
             question_id: question_id,
             start_time: start_time,
             end_time: end_time,

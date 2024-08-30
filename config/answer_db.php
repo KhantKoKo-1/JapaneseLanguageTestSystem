@@ -52,25 +52,41 @@ function get_all_answers_info($mysqli) {
     return $result;
 }
 
-function save_answer($mysqli, $answer_data, $created_by) {
+function save_answer($mysqli, $answer_data, $user_id) {
     $currentDateTime = date('Y-m-d H:i:s');
     $answer_date     = $answer_data['answer_date']; 
-    $answer_no       = $answer_data['answer_no']; 
     $question_id     = intval($answer_data['question_id']);
     $score           = intval($answer_data['score']);
     $start_time      = $answer_data['start_time'];
     $end_time        = $answer_data['end_time'];
     $is_correct      = $answer_data['is_correct'];
-    $created_by      = intval($created_by);
+    $user_id         = intval($user_id);
     
-    $sql = "INSERT INTO `answers` (`answer_no`, `answer_date`, `start_time`, `end_time`, `is_correct`, `score`, `question_id`, `user_id`, `created_by`, `created_at`) 
-            VALUES ('$answer_no', '$currentDateTime', '$start_time', '$end_time', '$is_correct', $score, '$question_id', '$created_by', '$created_by', '$currentDateTime')";
-    if($mysqli->query($sql)){
-        return true;
+    // Step 1: Insert without `answer_no`
+    $sql = "INSERT INTO `answers` (`answer_date`, `start_time`, `end_time`, `is_correct`, `score`, `question_id`, `user_id`, `created_by`, `created_at`) 
+            VALUES ('$answer_date', '$start_time', '$end_time', '$is_correct', $score, '$question_id', '$user_id', '$user_id', '$currentDateTime')";
+    
+    if ($mysqli->query($sql)) {
+        // Step 2: Retrieve the insert ID
+        $insert_id = $mysqli->insert_id;
+        
+        // Step 3: Generate `answer_no` based on insert_id, answer_date, question_id, user_id
+        $answer_no = "JLPT_" . $insert_id . '_' . $answer_date . '_' . $question_id . '_' . $user_id;
+
+        // Update the record with the generated `answer_no`
+        $update_sql = "UPDATE `answers` SET `answer_no` = '$answer_no' WHERE `answer_id` = $insert_id";
+
+        if ($mysqli->query($update_sql)) {
+            return true;
+        } else {
+            echo "Error updating record: " . $update_sql . "<br>" . mysqli_error($mysqli);
+        }
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($mysqli);
     }
+    
     return false;
 }
+
 
 ?>

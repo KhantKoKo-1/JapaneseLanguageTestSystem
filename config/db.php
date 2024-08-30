@@ -124,7 +124,7 @@ function create_table($mysqli)
 
     $sql = "CREATE TABLE IF NOT EXISTS `answers` (
         `answer_id` INT AUTO_INCREMENT,
-        `answer_no` VARCHAR(20) NOT NULL,
+        `answer_no` VARCHAR(20) Default NULL,
         `answer_date` DateTime NOT NULL,
         `start_time` TIME NOT NULL,
         `end_time` TIME NOT NULL,
