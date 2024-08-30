@@ -216,7 +216,6 @@ Swal.fire({
     background: `#fff url(${background_img_url})`,
     backdrop: `
         rgba(0,0,123,0.4)
-        url(${gif_img_url})
         left top
         no-repeat
     `,
