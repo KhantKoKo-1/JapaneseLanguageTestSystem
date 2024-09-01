@@ -98,7 +98,7 @@ if (isset($_GET['err'])) {
                                 $type_id    = $type['type_id'];
                                 $edit_url   = $admin_base_url . "category/type_form.php?type_id=" . $type_id;
                                 $delete_url = $admin_base_url . "category/type_delete.php?type_id=" . $type_id;
-                                $question_count = get_question_count_by_level_id($mysqli, $type_id);
+                                $question_count = get_question_count_by_type_id($mysqli, $type_id);
                             ?>
 
                                 <tr>

@@ -43,3 +43,8 @@ body {
   #title{
     font-weight: bold;
   }
+
+  ._input {
+    color:black !important;
+    background-color:#f0d3d9 !important;
+  }
