@@ -33,17 +33,17 @@ if (isset($_GET['level_id'])) {
 if (isset($_POST['Submit']) && $_POST['Submit'] == 1) {
     $level_name = $mysqli->real_escape_string($_POST["level_name"]);
     if ($level_name == "") {
-        $level_err = "Please Enter Level Name!"; 
+        $level_err = "Please Select Level Name!"; 
         $error = true;
     }
 
     if ($error == false) {
         try {  
-            $check_level_name_exist = get_level_by_name($mysqli, $level_name, $level_id);
-            if ($check_level_name_exist) {
-                $error = true;
-                $error_message = "This Level Name is already taken."; 
-            } else {
+            // $check_level_name_exist = get_level_by_name($mysqli, $level_name, $level_id);
+            // if ($check_level_name_exist) {
+            //     $error = true;
+            //     $error_message = "This Level Name is already taken."; 
+            // } else {
                 if ($level_id != '') {
                   $result = update_level($mysqli, $level_name, $user_id, $level_id);
                   if ($result) {
@@ -68,7 +68,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == 1) {
                     echo '<meta http-equiv="refresh" content="0;url=' . $url . '">';
                     exit();
                 }
-                }
+                // }
             }    
     }
         catch (Exception $e) {
@@ -77,6 +77,12 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == 1) {
             $error = true;
         }
     }
+}
+
+$levels = get_all_levels($mysqli);
+$existing_level_data = [];
+while ($level = $levels->fetch_assoc()) {
+    $existing_level_data[] = $level['level_name'];
 }
 
 ?>
@@ -105,12 +111,12 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == 1) {
     <div class="animated fadeIn">
         <!-- <div class="row"> -->
         <?php if ($error_message != "") { ?>
-            <div class="alert  alert-danger alert-dismissible fade show w-75 mx-auto" role="alert">
-                <span class="badge badge-pill badge-danger">Error</span>  <?php echo $error_message ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        <div class="alert  alert-danger alert-dismissible fade show w-75 mx-auto" role="alert">
+            <span class="badge badge-pill badge-danger">Error</span> <?php echo $error_message ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <?php } ?>
 
         <div class="row justify-content-center">
@@ -137,8 +143,9 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == 1) {
                                 <label for="level_name" class="form-control-label">Level Name</label>
                             </div>
                             <div class="col-6 col-md-6">
-                                <input type="text" id="level_name" name="level_name" placeholder="Enter Level Name"
-                                    class="form-control" value="<?php echo $level_name; ?>">
+                                <select id="level_name" name="level_name" class="form-control">
+                                    <option value="">Select a level</option>
+                                </select>
                                 <?php if ($level_err !== '') { ?>
                                 <span class="help-block text-danger"><?php echo $level_err; ?></span>
                                 <?php } ?>
@@ -148,12 +155,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == 1) {
                     <div class="card-footer d-flex justify-content-center">
                         <button type="submit" value="1" name="Submit" class="btn btn-primary btn-sm">
                             <i class="fa fa-dot-circle-o"></i>
-                            <?php if($level_id == "") {
-                                echo "Create";
-                            } else {
-                                echo "Edit";
-                            }
-                            ?>
+                            <?php echo ($level_id == "") ? "Create" : "Edit"; ?>
                         </button>
                         <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <button type="reset" id="resetBtn" class="btn btn-danger btn-sm">
@@ -169,6 +171,22 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == 1) {
 <?php
 require_once ("../../../layout/admin/footer.php");
 ?>
+
+<script>
+const existLevelData = <?php echo json_encode($existing_level_data); ?>;
+console.log(existLevelData);
+
+$(document).ready(function() {
+    // Array of options
+    const options = ['N1', 'N2', 'N3', 'N4', 'N5'];
+    const filteredOptions = options.filter(option => !existLevelData.includes(option));
+    // Populate the select element
+    const $select = $('#level_name');
+    filteredOptions.forEach(function(option) {
+        $select.append(new Option(option, option));
+    });
+});
+</script>
 
 </body>
 

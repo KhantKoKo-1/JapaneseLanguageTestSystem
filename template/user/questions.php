@@ -6,6 +6,7 @@ require_once("../../config/type_db.php");
 require_once("../../config/level_db.php");
 require_once("../../config/question_db.php");
 require_once("../../config/quiz_db.php");
+require_once("../../config/answer_db.php");
 
 $error = false;
 if (isset($_GET['level_id']) && isset($_GET['type_id'])) {
@@ -33,8 +34,10 @@ if ($error) {
 
     // Fetch questions based on level and type ID
     $questions = get_question_by_level_id_and_type_id($mysqli, $level_id, $type_id);
-
+    $check_question_id = check_wrong_answer_condition_by_userid($mysqli, $user_id);
+    
     while ($question = $questions->fetch_assoc()) {
+        $permit   = true;
         $question_id = $question['question_id'];
         $description = $question['description']; // Assuming this field exists
         $score       = $question['score']; // Assuming this field exists
@@ -62,8 +65,13 @@ if ($error) {
             }
             $i++;
         }
+        if (in_array($question_id, $check_question_id)) {
+            $permit = false;
+        }
+        // echo $permit;
     
         $questionData[] = [
+            'permission'  => $permit,
             'question_id' => $question_id,
             'question'    => $description,
             'score'       => $score,
@@ -205,7 +213,7 @@ const user_base_url = "<?php echo $user_base_url; ?>";
 const level_id = "<?php echo $level_id?>";
 var questions =
     <?php echo json_encode($questionData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_APOS); ?>;
-var background_img_url = base_url + "assets/common/images/time.jpg";
+var background_img_url = base_url + "assets/common/images/images.jfif";
 var gif_img_url = base_url + "assets/common/images/d533amv-ce8cbc9f-1ecd-4231-b5a6-b1002e188b16.gif";
 
 Swal.fire({
@@ -223,7 +231,7 @@ Swal.fire({
         title: 'color-title' // Apply custom class to the title
     },
     html: `
-        <select style='color: #f6fa0a;font-weight:bold;background-color:black' id="timeSelection" class="swal2-input">
+        <select style='color: #f6fa0a;font-weight:bold;background-color:#292b2b' id="timeSelection" class="swal2-input">
             <option value="unlimited">Unlimited</option>
             <option value="1">1 min</option>
             <option value="5">5 min</option>
@@ -244,7 +252,6 @@ Swal.fire({
 }).then((result) => {
     if (result.isConfirmed) {
         let selectedTime = result.value;
-
         // Handle countdown only for limited times (skip "unlimited")
         if (selectedTime !== 'unlimited') {
             selectedTime = parseInt(selectedTime); // Convert to number in minutes
@@ -274,10 +281,26 @@ Swal.fire({
                     document.querySelector('.view-results').click();
                 }
             }, 1000); // 1000ms interval for 1 second updates
+           
         } else {
             // Handle the "unlimited" case
             let timeSection = document.getElementById('duration');
             timeSection.textContent = "Unlimited Time.";
+        }
+        if(localStorage.getItem('permit') == 'false') {
+            Swal.fire({
+                title: "Alert",
+                text: "You've made two mistakes in answering this question. Therefore, you can't provide a correct answer. Please skip it!",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Skip"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("ques-view").innerHTML+="<div class='ques-circle incorrect'>"+(countQues)+"</div>";
+                    displayQuestions();
+                }
+            });
         }
     }
 });

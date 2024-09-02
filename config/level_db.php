@@ -14,13 +14,14 @@ function get_level_by_id($mysqli, $level_id)
     $result = $mysqli->query($sql);
     if ($result)  return $result->fetch_assoc();
 }
-function get_level_by_name($mysqli, $level_name, $level_id)
-{
-    $level_id = intval($level_id);
-    $sql = "SELECT * FROM `level` WHERE `level_name`= '$level_name' AND `level_id` != $level_id AND `deleted_by` IS NULL";
-    $result = $mysqli->query($sql);
-    if ($result)  return $result->fetch_assoc();
-}
+
+// function get_level_by_name($mysqli, $level_name, $level_id)
+// {
+//     $level_id = intval($level_id);
+//     $sql = "SELECT * FROM `level` WHERE `level_name`= '$level_name' AND `level_id` != $level_id AND `deleted_by` IS NULL";
+//     $result = $mysqli->query($sql);
+//     if ($result)  return $result->fetch_assoc();
+// }
 
 function update_level($mysqli, $level_name, $updated_by, $level_id)
 {

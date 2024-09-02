@@ -121,8 +121,6 @@ if (isset($_GET['err'])) {
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div><!-- .animated -->
 </div><!-- .content -->

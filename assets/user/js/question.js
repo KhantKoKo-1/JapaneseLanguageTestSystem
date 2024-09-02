@@ -62,11 +62,36 @@ function getCurrentDateTime() {
 }
 
 function displayQuestions() {
+    localStorage.removeItem('permit');
+    if (questions.length == countQues) {
+        addFinalResult(countQues);
+        document.querySelector("#continue").style.display="none";
+        document.querySelector("#backBtn").style.display="block";
+    }
+
     document.getElementById("ques-left").textContent="Question : "+(countQues+1)+"/"+questions.length;
     document.getElementById("question_id").value = questions[countQues].question_id;
     document.getElementById("start_time").innerHTML = getCurrentDateTime();
     document.querySelector(".question").innerHTML="<h1>"+questions[countQues].question+"</h1>";
     displayChoices(countQues);
+    console.log(questions[countQues]);
+    if (questions[countQues].permission == false && countQues == 0) {
+        localStorage.setItem('permit', 'false');
+    } else if (questions[countQues].permission == false && countQues != 0) {
+        Swal.fire({
+            title: "Alert",
+            text: "You've made two mistakes in answering this question. Therefore, you can't provide a correct answer. Please skip it!",
+            icon: "warning",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Skip"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("ques-view").innerHTML+="<div class='ques-circle incorrect'>"+(countQues)+"</div>";
+                displayQuestions();
+            }
+          });
+    }
     countQues++;
 }
 
@@ -95,6 +120,7 @@ function displayChoices(index) {
         container.innerHTML = '<p>Question not found.</p>';
     }
 }
+
 
 document.querySelector(".submit-answer").addEventListener("click",function(){
     let question_id = document.getElementById("question_id").value;
@@ -131,47 +157,44 @@ document.querySelector(".submit-answer").addEventListener("click",function(){
         }
     } 
     
-    let url = base_url + 'api/save_answer.php';
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' // Specify content type
-        },
-        body: JSON.stringify({
-            answer_date : answerDate,
-            // answer_no : answerNo,
-            question_id: question_id,
-            start_time: start_time,
-            end_time: end_time,
-            is_correct: is_correct,
-            score: scoreResult
-        }) // Convert JavaScript object to JSON string
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json(); // Parse JSON from the response
-    })
-    .then(data => {
-        if (data.status === 'success') {
-            if (questions.length == countQues) {
-                addFinalResult(countQues);
-                document.querySelector("#continue").style.display="none";
-                document.querySelector("#backBtn").style.display="block";
-            } else {
-                displayQuestions();
+        let url = base_url + 'api/save_answer.php';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Specify content type
+            },
+            body: JSON.stringify({
+                answer_date : answerDate,
+                // answer_no : answerNo,
+                question_id: question_id,
+                start_time: start_time,
+                end_time: end_time,
+                is_correct: is_correct,
+                score: scoreResult
+            }) // Convert JavaScript object to JSON string
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        } else {
-            console.error('Error:', data.message);
-        } // Handle the data
-    })
-    .catch(error => {
-        console.error('Error:', error); // Handle any errors
-    });
-      
-
-   
+            return response.json(); // Parse JSON from the response
+        })
+        .then(data => {
+            if (data.status === 'success') {
+                if (questions.length == countQues) {
+                    addFinalResult(countQues);
+                    document.querySelector("#continue").style.display="none";
+                    document.querySelector("#backBtn").style.display="block";
+                } else {
+                    displayQuestions();
+                }
+            } else {
+                console.error('Error:', data.message);
+            } // Handle the data
+        })
+        .catch(error => {
+            console.error('Error:', error); // Handle any errors
+        });
 });
 
 document.querySelector(".view-results").addEventListener("click",function(){

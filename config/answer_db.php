@@ -71,7 +71,7 @@ function save_answer($mysqli, $answer_data, $user_id) {
         $insert_id = $mysqli->insert_id;
         $formatted_answer_date = (new DateTime($answer_date))->format('Ymd');
         // Step 3: Generate `answer_no` based on insert_id, answer_date, question_id, user_id
-        $answer_no = "JLPT-" . $insert_id . $formatted_answer_date . $question_id . $user_id;
+        $answer_no = "JLPT-" . $insert_id . '-' . $formatted_answer_date . '-' . $question_id . '-' . $user_id;
 
         // Update the record with the generated `answer_no`
         $update_sql = "UPDATE `answers` SET `answer_no` = '$answer_no' WHERE `answer_id` = $insert_id";
@@ -86,6 +86,33 @@ function save_answer($mysqli, $answer_data, $user_id) {
     }
     
     return false;
+}
+
+function check_wrong_answer_condition_by_userid($mysqli , $user_id) {
+    $user_id = intval($user_id);
+    $sql = "SELECT 
+                `question_id`
+            FROM 
+                `answers`
+            WHERE
+                `user_id` = $user_id 
+                AND is_correct = 0";
+
+    $result = $mysqli->query($sql);
+    $temp_array   = [];
+    $return_array = [];
+
+    // $exists = array_key_exists('a', $array);
+    while ($row = $result->fetch_assoc()) { 
+        $question_id    = $row['question_id'];
+        
+        if (in_array($question_id, $temp_array)) {
+            $return_array[] = $question_id; 
+        }
+        $temp_array[]   = $question_id;
+    }
+    
+    return $return_array;
 }
 
 
